@@ -20,9 +20,8 @@ struct Node{
 
     //Returns bool if desired edge exists in edge list:
     bool edge_exists(string page_name){
-        for (auto & element : edge_list_){
+        for (auto & element : edge_list_)
             if(element == page_name){return true;}
-        }
         return false;
     }
 
