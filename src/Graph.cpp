@@ -8,7 +8,7 @@ void Graph::readIn() {
 	std::string line;
 	while (getline(in, line)) {
 		std::stringstream ss(line);
-		std::vector<std::string> item;
+		std::string item;
 		std::string tmp;
 		while(getline(ss, tmp, '\t')) {
 			item.push_back(tmp);
