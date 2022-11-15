@@ -13,7 +13,7 @@ void Graph::readIn() {
 		while(getline(ss, tmp, '\t')) {
 			item.push_back(tmp);
 		}
-        Node temp(item);
+        Node temp(item, std::vector<string>(), false);
 		node_list.push_back(temp);
 	}
 }
