@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-    cout<<"Hello World" << endl;
+    cout<< "Hello World" << endl;
     Node node1 = Node("Matt");
     node1.add_edge("Desi");
     node1.add_edge("Ruben");
