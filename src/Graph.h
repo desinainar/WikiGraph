@@ -4,7 +4,7 @@
 #include <iostream>
 class Graph {
     public:
-    void readIn();
+    void readIn(std::string tsv);
     private:
     std::vector<Node> node_list;
 };
