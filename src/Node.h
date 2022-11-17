@@ -10,9 +10,10 @@ struct Node{
     string title_;
     vector<Edge> edge_list_;
     bool explored_;
-
+    int index_; //in lieu of a full adjacency list
     //Constructor:
     Node(string title) : title_(title) { }
+    Node(string title, int index) : title_(title), index_(index) { }
 
     //Adding an edge to a node
     void add_edge(string page_name){
