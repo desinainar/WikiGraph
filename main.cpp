@@ -2,18 +2,22 @@
 
 #include <iostream>
 #include "src/Node.h"
+#include "src/Graph.h"
 
 using namespace std;
 
 int main()
 {
-    cout<< "Hello World" << endl;
-    Node node1 = Node("Matt");
-    node1.add_edge("Desi");
-    node1.add_edge("Ruben");
-    node1.print();
-    cout << node1.edge_exists("Ruben") << endl;
-    cout << node1.edge_exists("Desi") << endl;
-    cout << node1.edge_exists("Michael") << endl;
+    // g++ -o main main.cpp src/Node.cpp src/Graph.cpp    to compile without make file
+    // ./main                                             to run
+    cout << "Hello World" << endl;
+    Graph g = Graph();
+    g.readIn("Book1.txt");
+    g.print();
+    vector<Node> solution = g.Djikstras("Baseball", "Matt");
+    for (Node cur : solution) {
+        cout << cur.title_ << " ";
+    }
     return 0;
+    
 }

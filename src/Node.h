@@ -12,6 +12,7 @@ struct Node{
     bool explored_;
     int index_; //in lieu of a full adjacency list
     //Constructor:
+    Node() : title_("empty"){}
     Node(string title) : title_(title) { }
     Node(string title, int index) : title_(title), index_(index) { }
 
