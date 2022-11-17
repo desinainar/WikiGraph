@@ -1,12 +1,13 @@
 #pragma once
-#include<Node.h>
+#include "Node.h"
 #include <vector>
 #include <iostream>
 class Graph {
-    public:
+    public:    
     void readIn(std::string tsv);
-    std::string Djikstras(std::string target);
-    Node findNode(std::string title)
+    void print();
+    //std::string Djikstras(std::string target);
+    //Node findNode(std::string title)
 
     private:
     std::vector<Node> node_list; //Node contains adjacency lsit
