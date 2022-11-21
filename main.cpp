@@ -8,9 +8,8 @@ using namespace std;
 
 int main()
 {
-    // g++ -o main main.cpp src/Node.cpp src/Graph.cpp    to compile without make file
-    // ./main                                             to run
-    cout << "Hello World" << endl;
+    // g++ -g -o main main.cpp src/Node.cpp src/Graph.cpp    to compile without make file
+    // ./main                                                to run
     Graph g = Graph();
     g.readIn("Book1.txt");
     g.print();
@@ -19,5 +18,4 @@ int main()
         cout << cur.title_ << " ";
     }
     return 0;
-    
 }

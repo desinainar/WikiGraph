@@ -31,7 +31,7 @@ struct Node{
     //Prints the contents of the Node
     void print(){
         cout << "Title: " << title_ << endl;
-        cout << "Edges: \n";
+        cout << "Edges: " << endl;
         for (auto & elem : edge_list_)
             elem.print();
     }

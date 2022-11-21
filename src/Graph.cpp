@@ -24,11 +24,11 @@ void Graph::readIn(std::string tsv) {
 		std::vector<std::string> current_tab;
 		std::string tmp;
 		for (std::string each; std::getline(ss, each, '\t'); current_tab.push_back(each)); // put each value in array
-		if (count == 0 || current_tab[0] != node_list[count].title_) { //if the title is not the same as the node we are working in, create new node
+		if (count == 0 || current_tab[0] != node_list[count-1].title_) { //if the title is not the same as the node we are working in, create new node
 			count++;
 			node_list.push_back(Node(current_tab[0], count));
 		}
-		node_list.back().add_edge(current_tab[1]); //push link to nodes edges vector
+		node_list.back().add_edge(current_tab[1].substr(0, current_tab[1].size()-1));
 	}
 }
 
