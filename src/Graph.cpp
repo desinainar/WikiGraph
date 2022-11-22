@@ -54,12 +54,12 @@ std::vector<Node> Graph::Djikstras(std::string source, std::string target) {
  	std::vector<Node> previous(node_list.size());
  	Node src = Node("empty");
  	std::queue<Node> q;
- 	for (Node cur : node_list) {
- 		distances[cur.index_] = -1;
- 		previous[cur.index_] = Node("empty");
- 		q.push(cur);
- 		if (cur.title_ == source) {
- 			src = cur;
+ 	for (auto & cur : node_map) {
+ 		distances[cur.second.index_] = -1;
+ 		previous[cur.second.index_] = Node("empty");
+ 		q.push(cur.second);
+ 		if (cur.second.title_ == source) {
+ 			src = cur.second;
  		}
  	}
  	if (src.title_ == "empty") return std::vector<Node>();  //will be called by a helper function that if vector is empty, return that source doesnt exist
@@ -70,7 +70,7 @@ std::vector<Node> Graph::Djikstras(std::string source, std::string target) {
  		q.pop();
  		u.explored_ = true;
  		for(Edge edge : u.edge_list_) {
- 			Node v = findNode(edge.destination_);
+ 			Node v = node_map[edge.destination_]
  			if (v.explored_ == false) {
  				int alt = distances[u.index_] + 1; // 1 since all weights are 1
  				if (alt < distances[v.index_]) {
@@ -81,7 +81,7 @@ std::vector<Node> Graph::Djikstras(std::string source, std::string target) {
  		}
  	}
  	std::vector<Node> shortest_path;
- 	Node end = findNode(target);
+ 	Node end = node_map[target];
  	while(end.index_ < previous.size()) { //parse thru previous list to get shortest path
  		shortest_path.insert(shortest_path.begin(), end);
  		end = previous[end.index_];
