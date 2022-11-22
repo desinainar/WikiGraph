@@ -24,17 +24,25 @@ void Graph::readIn(std::string tsv) {
 		std::vector<std::string> current_tab;
 		std::string tmp;
 		for (std::string each; std::getline(ss, each, '\t'); current_tab.push_back(each)); // put each value in array
+		count++;
+		node_map[current_tab[0]] = Node(current_tab[0], count);
+		node_map[current_tab[0]].add_edge(current_tab[1].substr(0, current_tab[1].size()-1));
+
+		
+		/*
 		if (count == 0 || current_tab[0] != node_list[count-1].title_) { //if the title is not the same as the node we are working in, create new node
 			count++;
 			node_list.push_back(Node(current_tab[0], count));
+			//node_map.insert_or_assign(current_tab[0], Node(current_tab[0], count))
 		}
 		node_list.back().add_edge(current_tab[1].substr(0, current_tab[1].size()-1));
+		*/
 	}
 }
 
 void Graph::print(){
-	for (auto & node : node_list){
-		node.print();
+	for (auto & node : node_map){
+		node.second.print();
 		cout<< " " << endl;
 	}
 }

@@ -13,9 +13,9 @@ int main()
     Graph g = Graph();
     g.readIn("Book1.txt");
     g.print();
-    vector<Node> solution = g.Djikstras("Baseball", "Matt");
+    /*vector<Node> solution = g.Djikstras("Baseball", "Matt");
     for (Node cur : solution) {
         cout << cur.title_ << " ";
-    }
+    }*/
     return 0;
 }
