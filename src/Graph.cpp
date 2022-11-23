@@ -10,6 +10,23 @@
 #include <sstream>
 using namespace std;
 
+//check to see if 2 graphs are identical
+bool Graph::operator==(Graph g1){
+	std::vector<Node> g1_list = g1.get_node_list();
+	if(node_list.size() != g1_list.size()){
+		return false;
+	}
+	else{
+		for (unsigned i = 0; i < node_list.size(); i++){
+			if(node_list[i] != g1_list[i]){
+				return false;
+			}
+		}
+		return true;
+	}
+}
+
+
 void Graph::readIn(std::string tsv) {
 	ifstream in(tsv);
     if (in.fail()) {
@@ -89,6 +106,16 @@ std::vector<Node> Graph::Djikstras(std::string source, std::string target) {
  	}
 	return Node("no");
  }
+
+std::vector<Node> Graph::get_node_list(){
+	return node_list;
+}
+
+
+
+
+
+
 /*
 while prev[u] is defined:                 // Construct the shortest path with a stack S
 4      insert u at the beginning of S          // Push the vertex onto the stack
