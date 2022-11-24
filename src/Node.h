@@ -1,10 +1,10 @@
 #pragma once
-using namespace std;
-
 #include <vector>
 #include <string>
 #include <iostream>
 #include "Edge.h"
+
+using namespace std;
 
 struct Node{
     string title_;

@@ -91,7 +91,7 @@ std::vector<Node> Graph::Djikstras(std::string source, std::string target) {
  	}
  	std::vector<Node> shortest_path;
  	Node end = findNode(target);
- 	while(end.index_ < previous.size()) { //parse thru previous list to get shortest path
+ 	while(end.index_ < (int)previous.size()) { //parse thru previous list to get shortest path
  		shortest_path.insert(shortest_path.begin(), end);
  		end = previous[end.index_];
  	}
