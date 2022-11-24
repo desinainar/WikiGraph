@@ -1,18 +1,24 @@
-# the compiler: gcc for C program, define as g++ for C++
-  CC = gcc
- 
-  # compiler flags:
-  #  -g     - this flag adds debugging information to the executable file
-  #  -Wall  - this flag is used to turn on most compiler warnings
-  CFLAGS  = -g -Wall
- 
-  # The build target 
-  TARGET = main.cpp
- 
-  all: $(TARGET)
- 
-  $(TARGET): $(TARGET).c
-              $(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c
- 
-  clean:
-              $(RM) $(TARGET)
+EXENAME = main
+OBJS = main.o Edge.o Graph.o Node.o
+
+CXX = clang++
+CXXFLAGS = -std=c++0x -c -g -O0 -Wall -Wextra
+LD = clang++
+LDFLAGS = -std=c++0x
+
+all: $(EXENAME)
+
+$(EXENAME): $(OBJS)
+	$(LD) $^ $(LDFLAGS) -o $@
+
+Edge.o: Edge.cpp
+	$(CXX) $< $(CXXFLAGS)
+
+Graph.o: Graph.cpp
+	$(CXX) $< $(CXXFLAGS)
+
+Node.o: Node.cpp
+	$(CXX) $< $(CXXFLAGS)
+
+clean:
+	-rm -f *.o $(EXENAME)
