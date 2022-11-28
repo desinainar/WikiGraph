@@ -11,6 +11,7 @@ struct Node{
     vector<Edge> edge_list_;
     bool explored_;
     int index_; //in lieu of a full adjacency list
+    int weight_;
     //Constructor:
     Node() : title_("empty"){}
     Node(string title) : title_(title) { }
@@ -18,7 +19,7 @@ struct Node{
 
     //Adding an edge to a node
     void add_edge(string page_name){
-        edge_list_.push_back(Edge(title_, page_name));
+        edge_list_.emplace_back(Edge(title_, page_name));
     }
 
     //Returns bool if desired edge exists in edge list:
@@ -31,7 +32,7 @@ struct Node{
     //Prints the contents of the Node
     void print(){
         cout << "Title: " << title_ << endl;
-        cout << "Edges: " << endl;
+        cout << "Edges (" << edge_list_.size() << "): " << endl;
         for (auto & elem : edge_list_)
             elem.print();
     }

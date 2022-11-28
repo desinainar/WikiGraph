@@ -15,7 +15,7 @@ struct Edge{
     int weight_;
 
     //Constructor:
-    Edge(string source, string destination) : source_(source), destination_(destination), weight_(1) { }
+    Edge(string source, string destination) : source_(source), destination_(destination) { }
 
     bool operator!=(const Edge e1){
         if(source_ != e1.source_){return true;}
@@ -24,10 +24,7 @@ struct Edge{
     }
 
     void print(){
-        cout << "Source: " << source_ <<endl;
-        cout << "Destination: " << destination_ <<endl;
-        cout << "Weight: " << weight_ << endl;
-        cout << " " << endl;
+        cout << source_ << " -> " << destination_ << endl;
     }
 
 };
