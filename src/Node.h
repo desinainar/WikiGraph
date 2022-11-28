@@ -1,10 +1,10 @@
 #pragma once
-using namespace std;
-
 #include <vector>
 #include <string>
 #include <iostream>
 #include "Edge.h"
+
+using namespace std;
 
 struct Node{
     string title_;
@@ -35,5 +35,21 @@ struct Node{
         cout << "Edges (" << edge_list_.size() << "): " << endl;
         for (auto & elem : edge_list_)
             elem.print();
+    }
+
+    
+    bool operator!=(const Node n1){
+        if(title_ != n1.title_){
+            return true;
+        }
+        if(edge_list_.size() != n1.edge_list_.size()){
+            return true;
+        }
+        for(unsigned i = 0; i < edge_list_.size(); i++){
+            if(edge_list_[i] != n1.edge_list_[i]){
+                return true;
+            }
+        }
+        return false;
     }
 };
