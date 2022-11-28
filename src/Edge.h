@@ -15,13 +15,10 @@ struct Edge{
     int weight_;
 
     //Constructor:
-    Edge(string source, string destination) : source_(source), destination_(destination), weight_(1) { }
+    Edge(string source, string destination) : source_(source), destination_(destination) { }
 
     void print(){
-        cout << "Source: " << source_ <<endl;
-        cout << "Destination: " << destination_ <<endl;
-        cout << "Weight: " << weight_ << endl;
-        cout << " " << endl;
+        cout << source_ << " -> " << destination_ << endl;
     }
 
 };

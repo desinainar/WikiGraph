@@ -25,8 +25,13 @@ void Graph::readIn(std::string tsv) {
 		std::string tmp;
 		for (std::string each; std::getline(ss, each, '\t'); current_tab.push_back(each)); // put each value in array
 		count++;
-		node_map[current_tab[0]] = Node(current_tab[0], count);
-		node_map[current_tab[0]].add_edge(current_tab[1].substr(0, current_tab[1].size()-1));
+		auto it = node_map[current_tab[0]]; //access of create new key with currenttab[0]
+		it = Node(current_tab[0], count);
+		for (size_t i = 1; i < current_tab.size(); i++) {
+			it.add_edge(current_tab[i]);//.substr(0, current_tab[i].size()-1));
+		}
+		it.weight_ = it.edge_list_.size();
+		node_map[current_tab[0]] = it;
 
 		
 		/*
@@ -70,7 +75,7 @@ std::vector<Node> Graph::Djikstras(std::string source, std::string target) {
  		q.pop();
  		u.explored_ = true;
  		for(Edge edge : u.edge_list_) {
- 			Node v = node_map[edge.destination_]
+ 			Node v = node_map[edge.destination_];
  			if (v.explored_ == false) {
  				int alt = distances[u.index_] + 1; // 1 since all weights are 1
  				if (alt < distances[v.index_]) {
