@@ -6,6 +6,8 @@ using namespace std;
 
 // g++ -g -o test tests.cpp src/Node.cpp src/Graph.cpp    to compile without make file
 // ./test                                                to run
+
+//m
 int main(){
 
     // '==' operator test1
