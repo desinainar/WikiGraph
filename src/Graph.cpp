@@ -8,7 +8,7 @@
 using namespace std;
 
 //check to see if 2 graphs are identical
-bool Graph::operator==(Graph g1){
+/*bool Graph::operator==(Graph g1){
 	std::vector<Node> g1_list = g1.get_node_list();
 	if(node_list.size() != g1_list.size()){
 		return false;
@@ -21,7 +21,7 @@ bool Graph::operator==(Graph g1){
 		}
 		return true;
 	}
-}
+} */
 
 
 void Graph::readIn(std::string tsv) {
@@ -59,58 +59,10 @@ void Graph::print(){
 }
 
 //add heap from lab
-std::vector<Node> Graph::Djikstras(std::string source, std::string target) { 
- 	std::vector<int> distances(node_map.size());
- 	std::vector<Node> previous(node_map.size());
- 	Node src = Node("empty");
- 	std::queue<Node> q;
- 	for (auto & cur : node_map) {
- 		distances[cur.second.index_] = -1;
- 		previous[cur.second.index_] = Node("empty");
- 		q.push(cur.second);
- 		if (cur.second.title_ == source) {
- 			src = cur.second;
- 		}
- 	}
- 	if (src.title_ == "empty") return std::vector<Node>();  //will be called by a helper function that if vector is empty, return that source doesnt exist
- 	distances[src.index_] = 0;
- 	//heap Q(node_list); might just need a regualr queue if we are saying all weights are 1
- 	while (!q.empty()) { //problem with edge list: we need to make it faster to find the node according to its title-maybe map where k=title, v = node
- 		Node u = q.front();
- 		q.pop();
- 		u.explored_ = true;
- 		for(Edge edge : u.edge_list_) {
- 			Node v = node_map[edge.destination_];
- 			if (v.explored_ == false) {
- 				int alt = distances[u.index_] + 1; // 1 since all weights are 1
- 				if (alt < distances[v.index_]) {
- 					distances[v.index_] = alt;
- 					previous[v.index_] = u;
- 				}
- 			}
- 		}
- 	}
- 	std::vector<Node> shortest_path;
- 	Node end = node_map[target];
- 	while(end.index_ < previous.size()) { //parse thru previous list to get shortest path
- 		shortest_path.insert(shortest_path.begin(), end);
- 		end = previous[end.index_];
- 	}
- 	return shortest_path; // we need to write some stuff for if the path doesnt exist aswell.
+std::vector<Node> Graph::Bfs(std::string source, std::string target) { 
+ 	std::vector<Node> to_return;
+	return std::vector<Node>();
  }
-
- Node Graph::findNode(std::string title) { // super expenisve, map might be better to be able to find nodes according to title
- 	for(Node cur : node_list) {
- 		if (cur.title_ == title) {
- 			return cur;
- 		}
- 	}
-	return Node("no");
- }
-
-std::vector<Node> Graph::get_node_list(){
-	return node_list;
-}
 
 
 
