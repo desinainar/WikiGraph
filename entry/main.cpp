@@ -1,8 +1,8 @@
 // Main
 
 #include <iostream>
-#include "src/Node.h"
-#include "src/Graph.h"
+#include "../src/Node.h"
+#include "../src/Graph.h"
 
 using namespace std;
 
