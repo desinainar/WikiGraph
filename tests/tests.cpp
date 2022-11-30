@@ -4,8 +4,8 @@
 
 using namespace std;
 
-// g++ -g -o test tests.cpp src/Node.cpp src/Graph.cpp    to compile without make file
-// ./test                                                to run
+// g++ -g -o test tests.cpp ../src/Node.cpp ../src/Graph.cpp    to compile without make file
+// ./test                                                 to run
 
 //m
 int main(){
@@ -57,7 +57,7 @@ int main(){
     Graph twonodemanual = Graph();
         //add two nodes and two edges
     if(twonodereadin == twonodemanual){cout << "Graph with 2 Nodes test passed" << endl;};
-    else{cout << "Graph with 2 Nodes test failed" << endl;}
+    // else{cout << "Graph with 2 Nodes test failed" << endl;}
 
     //Graph With only bad nodes
 
