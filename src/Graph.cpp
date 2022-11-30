@@ -39,15 +39,15 @@ void Graph::readIn(std::string tsv) {
 		std::string tmp;
 		for (std::string each; std::getline(ss, each, '\t'); current_tab.push_back(each)); // put each value in array
 		
-		Node* it = &node_map[current_tab[0]]; //access of create new key with currenttab[0]
-		if (it->title_ == "empty") {
-			*it = Node(current_tab[0], count);
+		if (current_tab[0].find("%") == 0) {
+			Node* it = &node_map[current_tab[0]]; //access of create new key with currenttab[0]
+			if (it->title_ == "empty") {
+				*it = Node(current_tab[0], count);
+			}
+			it->add_edge(current_tab[1]);
+			//node_map[current_tab[0]] = *it;
+			count++;
 		}
-		
-		it->add_edge(current_tab[1]);
-		//node_map[current_tab[0]] = *it;
-		count++;
-
 	}
 }
 
