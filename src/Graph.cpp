@@ -16,10 +16,10 @@ bool Graph::operator==(Graph g1){
 		if ((it_1 -> second != it_2 -> second) == true) {
 			return false;
 		}
-		return true;
 	}
+	return true;
 }
-void addNode(string title, string destination) {
+void Graph::addNode(string title, string destination) {
 	Node* it = &node_map[title]; //access of create new key with currenttab[0]
 	if (it->title_ == "empty") {
 		*it = Node(title);
