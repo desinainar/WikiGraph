@@ -45,7 +45,7 @@ struct Node{
             return true;
         }
         for(unsigned i = 0; i < edge_list_.size(); i++){
-            if(edge_list_[i] != n1.edge_list_[i]){
+            if((edge_list_[i] != n1.edge_list_[i]) == true){
                 return true;
             }
         }
