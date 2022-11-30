@@ -44,6 +44,7 @@ int main(){
     onenodereadin.readIn("data/OneNode1.txt");
     Graph onenodemanual = Graph();
         //add node and edge to the artificial graph
+    onenodemanual.addNode("Baseball", "Ruben");
     if(onenodereadin == onenodemanual){cout << "Graph with 1 Node test passed" << endl;}
     else{cout << "Graph with 1 Node test failed" << endl;}
 
@@ -52,11 +53,18 @@ int main(){
     Graph twonodereadin = Graph();
     twonodereadin.readIn("data/OneNode2.txt");
     Graph twonodemanual = Graph();
-        //add two nodes and two edges
-    if(twonodereadin == twonodemanual){cout << "Graph with 2 Nodes test passed" << endl;};
-    // else{cout << "Graph with 2 Nodes test failed" << endl;}
+
+    twonodemanual.addNode("Baseball", "Matt");
+    twonodemanual.addNode("Baseball", "Ruben");
+    if(twonodereadin == twonodemanual){cout << "Graph with 2 Nodes test passed" << endl;}
+    else{cout << "Graph with 2 Nodes test failed" << endl;}
 
     //Graph With only bad nodes
+    Graph badreadin = Graph();
+    badreadin.readIn("data/onlybadnodes.txt");
+    Graph badmanual = Graph();
+    if(badreadin == badmanual){cout << "Graph With only bad nodes test passed" << endl;}
+    else{cout << "Graph With only bad nodes failed" << endl;}
 
 
     //Graph with mixture of good and bad nodes
