@@ -8,21 +8,25 @@
 using namespace std;
 
 //check to see if 2 graphs are identical
-/*bool Graph::operator==(Graph g1){
-	std::vector<Node> g1_list = g1.get_node_list();
-	if(node_list.size() != g1_list.size()){
+bool Graph::operator==(Graph g1){
+	if (node_map.size() != g1.node_map.size()) {
 		return false;
 	}
-	else{
-		for (unsigned i = 0; i < node_list.size(); i++){
-			if(node_list[i] != g1_list[i]){
-				return false;
-			}
+	for (auto it_1 = node_map.begin(), it_2 = g1.node_map.begin(); it_1 != node_map.end(); ++it_1; ++it_2) {
+		if ((it_1 != it_2) == true) {
+			return false;
 		}
-		return true;
 	}
-} */
+	return true;
+} 
 
+void Graph::addNode(string title, string destination) {
+	Node* it = &node_map[current_tab[0]];
+	if (it -> title_ == "empty") {
+		*it = Node(title);
+	}
+	it -> add_edge(current_tab[1]);
+}
 
 void Graph::readIn(std::string tsv) {
 	ifstream in(tsv);
