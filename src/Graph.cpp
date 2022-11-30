@@ -12,7 +12,7 @@ bool Graph::operator==(Graph g1){
 	if (node_map.size() != g1.node_map.size()) {
 		return false;
 	}
-	for (auto it_1 = node_map.begin(), it_2 = g1.node_map.begin(); it_1 != node_map.end(); ++it_1; ++it_2) {
+	for (auto it_1 = node_map.begin(), it_2 = g1.node_map.begin(); it_1 != node_map.end(); ++it_1, ++it_2) {
 		if ((it_1 != it_2) == true) {
 			return false;
 		}
