@@ -6,11 +6,5 @@ int main()
     Graph g = Graph();
     g.readIn("Book3.txt");
     g.print();
-    vector<Node> solution = g.Djikstras("article 1", "article 4");
-    cout << "solution: ";
-    for (Node cur : solution) {
-        cout << cur.title_ << " ";
-    }
-    cout << "\n";
     return 0;
 }
