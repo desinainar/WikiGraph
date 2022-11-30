@@ -7,8 +7,8 @@ class Graph {
     public:    
     
     //Check to see if two graphs are identical
-    //bool operator==(Graph g1);
-
+    bool operator==(Graph g1);
+    void addNode(string title, string destination);
     //read a tsv and load into
     void readIn(std::string tsv);
     void print();
