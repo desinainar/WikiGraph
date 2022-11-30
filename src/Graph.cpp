@@ -16,14 +16,7 @@ bool Graph::operator==(Graph g1){
 		if ((it_1 -> second != it_2 -> second) == true) {
 			return false;
 		}
-	}
-	return true;
-} 
-
-void Graph::addNode(string title, string destination) {
-	Node* it = &node_map[title];
-	if (it -> title_ == "empty") {
-		*it = Node(title);
+		return true;
 	}
 	it -> add_edge(destination);
 }
