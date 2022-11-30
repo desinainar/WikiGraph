@@ -1,8 +1,5 @@
 #include"Graph.h"
 #include <queue>
-
-
-
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -41,24 +38,16 @@ void Graph::readIn(std::string tsv) {
 		std::vector<std::string> current_tab;
 		std::string tmp;
 		for (std::string each; std::getline(ss, each, '\t'); current_tab.push_back(each)); // put each value in array
-		count++;
-		auto it = node_map[current_tab[0]]; //access of create new key with currenttab[0]
-		it = Node(current_tab[0], count);
-		for (size_t i = 1; i < current_tab.size(); i++) {
-			it.add_edge(current_tab[i]);//.substr(0, current_tab[i].size()-1));
-		}
-		it.weight_ = it.edge_list_.size();
-		node_map[current_tab[0]] = it;
-
 		
-		/*
-		if (count == 0 || current_tab[0] != node_list[count-1].title_) { //if the title is not the same as the node we are working in, create new node
-			count++;
-			node_list.push_back(Node(current_tab[0], count));
-			//node_map.insert_or_assign(current_tab[0], Node(current_tab[0], count))
+		Node* it = &node_map[current_tab[0]]; //access of create new key with currenttab[0]
+		if (it->title_ == "empty") {
+			*it = Node(current_tab[0], count);
 		}
-		node_list.back().add_edge(current_tab[1].substr(0, current_tab[1].size()-1));
-		*/
+		
+		it->add_edge(current_tab[1]);
+		//node_map[current_tab[0]] = *it;
+		count++;
+
 	}
 }
 
@@ -69,11 +58,10 @@ void Graph::print(){
 	}
 }
 
-
+//add heap from lab
 std::vector<Node> Graph::Djikstras(std::string source, std::string target) { 
-// https://stackoverflow.com/questions/28998597/how-to-save-shortest-path-in-dijkstra-algorithm - to print path itself
- 	std::vector<int> distances(node_list.size());
- 	std::vector<Node> previous(node_list.size());
+ 	std::vector<int> distances(node_map.size());
+ 	std::vector<Node> previous(node_map.size());
  	Node src = Node("empty");
  	std::queue<Node> q;
  	for (auto & cur : node_map) {

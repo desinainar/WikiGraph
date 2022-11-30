@@ -11,7 +11,6 @@ struct Node{
     vector<Edge> edge_list_;
     bool explored_;
     int index_; //in lieu of a full adjacency list
-    int weight_;
     //Constructor:
     Node() : title_("empty"){}
     Node(string title) : title_(title) { }
@@ -33,7 +32,6 @@ struct Node{
     void print(){
         cout << "Title: " << title_ << endl;
         cout << "Edges (" << edge_list_.size() << ") " << endl;
-        cout <<"Weight (" << weight_ << "):" << endl;
         for (auto & elem : edge_list_)
             elem.print();
     }
