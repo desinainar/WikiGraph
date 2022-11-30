@@ -33,4 +33,22 @@ int main(){
     if(flag1 == false){cout << "'==' operator test2 passed" << endl;}
     else{cout << "'==' operator test2 failed" << endl;}
 
+
+    //Empty Graph Test
+
+
+    //Graph with 1 Node
+
+
+    //Graph with 2 Nodes
+
+
+    //Graph With only bad nodes
+
+
+    //Graph with mixture of good and bad nodes
+
+
+    //Large Graph
+
 }
