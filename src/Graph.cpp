@@ -18,7 +18,13 @@ bool Graph::operator==(Graph g1){
 		}
 		return true;
 	}
-	it -> add_edge(destination);
+}
+void addNode(string title, string destination) {
+	Node* it = &node_map[title]; //access of create new key with currenttab[0]
+	if (it->title_ == "empty") {
+		*it = Node(title);
+	}
+	it->add_edge(destination);
 }
 
 void Graph::readIn(std::string tsv) {
