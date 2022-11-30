@@ -53,11 +53,11 @@ int main(){
     Graph twonodereadin = Graph();
     twonodereadin.readIn("data/OneNode2.txt");
     Graph twonodemanual = Graph();
-
     twonodemanual.addNode("Baseball", "Matt");
     twonodemanual.addNode("Baseball", "Ruben");
     if(twonodereadin == twonodemanual){cout << "Graph with 2 Nodes test passed" << endl;}
     else{cout << "Graph with 2 Nodes test failed" << endl;}
+
 
     //Graph With only bad nodes
     Graph badreadin = Graph();
@@ -68,8 +68,16 @@ int main(){
 
 
     //Graph with mixture of good and bad nodes
-
-
+    Graph badmixturereadin = Graph();
+    badmixturereadin.readIn("data/badmixture.txt");
+    Graph badmixturemanual = Graph();
+    badmixturemanual.addNode("Baseball", "Matt");
+    badmixturemanual.addNode("Baseball", "Ruben");
+    badmixturemanual.addNode("Baseball", "Desi");
+    if(badmixturereadin == badmixturemanual){cout << "Graph with mixture of good and bad nodes test passed" << endl;}
+    else{cout << "Graph with mixture of good and bad nodes test failed" << endl;}
+    
+    
     //Large Graph
 
 }
