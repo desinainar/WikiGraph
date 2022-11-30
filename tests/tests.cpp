@@ -4,7 +4,7 @@
 
 using namespace std;
 
-//  ```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````1q`    to compile without make file
+//g++ -g -o test tests.cpp ../src/Node.cpp ../src/Graph.cpp          to compile without make file
 // ./test                                                to run
 int main(){
 
@@ -13,9 +13,8 @@ int main(){
     g.readIn("data/OneNode2.txt");
     Graph g1 = Graph();
     g1.readIn("data/OneNode2.txt");
-    bool flag;
+    bool flag = false;
     if(g == g1){flag = true;}
-    else{flag = false;}
     if(flag == true){cout << "'==' operator test1 passed" << endl;}
     else{cout << "'==' operator test1 failed" << endl;}
 
