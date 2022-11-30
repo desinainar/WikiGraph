@@ -35,13 +35,29 @@ int main(){
 
 
     //Empty Graph Test
+    Graph emptyreadin = Graph();
+    emptyreadin.readIn("data/EmptyGraph.txt");
+    Graph emptymanual = Graph();
+    if(emptyreadin == emptymanual){cout << "Empty graph test passed" << endl;}
+    else{cout << "Empty graph test fail" << endl;}
 
 
     //Graph with 1 Node
+    Graph onenodereadin = Graph();
+    onenodereadin.readIn("data/OneNode1.txt");
+    Graph onenodemanual = Graph();
+        //add node and edge to the artificial graph
+    if(onenodereadin == onenodemanual){cout << "Graph with 1 Node test passed" << endl;}
+    else{cout << "Graph with 1 Node test failed" << endl;}
 
 
     //Graph with 2 Nodes
-
+    Graph twonodereadin = Graph();
+    twonodereadin.readIn("data/OneNode2.txt");
+    Graph twonodemanual = Graph();
+        //add two nodes and two edges
+    if(twonodereadin == twonodemanual){cout << "Graph with 2 Nodes test passed" << endl;};
+    else{cout << "Graph with 2 Nodes test failed" << endl;}
 
     //Graph With only bad nodes
 
