@@ -47,6 +47,7 @@ void Graph::readIn(std::string tsv) {
 			if (it->title_ == "empty") {
 				*it = Node(current_tab[0], count);
 			}
+			current_tab[1].pop_back();
 			it->add_edge(current_tab[1]);
 			//node_map[current_tab[0]] = *it;
 			count++;
