@@ -12,7 +12,7 @@ class Graph {
     //read a tsv and load into
     void readIn(std::string tsv);
     void print();
-    std::vector<Node> Bfs(std::string source, std::string target);
+    std::vector<Node> Bfs(std::string source);
 
 
     private:

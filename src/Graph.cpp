@@ -62,8 +62,24 @@ void Graph::print(){
 }
 
 //add heap from lab
-std::vector<Node> Graph::Bfs(std::string source, std::string target) { 
+std::vector<Node> Graph::Bfs(std::string source) { 
  	std::vector<Node> to_return;
+	queue<string> traversal;
+	map<string, bool> visited;
+	
+	traversal.push(source);
+	visited[source] = true;
+	while (!traversal.empty()) {
+		string article = traversal.front();
+		traversal.pop();
+		for (Edge e : node_map[article]) {
+			if (!visited[e]) {
+				traversal.push(e);
+				visited[e] = true;
+			}
+		}
+	}
+
 	return std::vector<Node>();
  }
 
