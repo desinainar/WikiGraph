@@ -40,9 +40,9 @@ void Graph::readIn(std::string tsv) {
 		std::stringstream ss(line);
 		std::vector<std::string> current_tab;
 		std::string tmp;
-		for (std::string each; std::getline(ss, each, '\t'); current_tab.push_back(each)); // put each value in array
+		if (line.find("%") == string::npos) {
+			for (std::string each; std::getline(ss, each, '\t'); current_tab.push_back(each)); // put each value in array
 		
-		if (current_tab[0].contains("%") != string::npos) {
 			Node* it = &node_map[current_tab[0]]; //access of create new key with currenttab[0]
 			if (it->title_ == "empty") {
 				*it = Node(current_tab[0], count);
@@ -51,6 +51,7 @@ void Graph::readIn(std::string tsv) {
 			//node_map[current_tab[0]] = *it;
 			count++;
 		}
+		
 	}
 }
 
@@ -72,10 +73,10 @@ std::vector<Node> Graph::Bfs(std::string source) {
 	while (!traversal.empty()) {
 		string article = traversal.front();
 		traversal.pop();
-		for (Edge e : node_map[article]) {
-			if (!visited[e]) {
-				traversal.push(e);
-				visited[e] = true;
+		for (Edge e : node_map[article].edge_list_) {
+			if (visited[e.destination_] == false) {
+				traversal.push(e.destination_);
+				visited[e.destination_] = true;
 			}
 		}
 	}
