@@ -11,7 +11,8 @@
 #ifndef TWOBLUECUBES_SINGLE_INCLUDE_CATCH_HPP_INCLUDED
 #define TWOBLUECUBES_SINGLE_INCLUDE_CATCH_HPP_INCLUDED
 // start catch.hpp
-
+#include "../src/Node.h"
+#include "../src/Graph.h"
 
 #define CATCH_VERSION_MAJOR 2
 #define CATCH_VERSION_MINOR 13

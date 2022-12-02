@@ -89,17 +89,21 @@
 
 using namespace std;
 
-
 #include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
 #include <set>
 
+// navicate to tests directory
+// to compile: make test
+// to run:     ./-o
 
 
-//
-TEST_CASE("Testing", "[weight=5]") {
-    
-    REQUIRE("1" == "0");
+TEST_CASE("'==' operator test1", "[weight=5]") {
+    Graph g = Graph();
+    g.readIn("data/OneNode2.txt");
+    Graph g1 = Graph();
+    g1.readIn("data/OneNode2.txt");
+    REQUIRE(g == g1);
 }
