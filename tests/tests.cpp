@@ -248,3 +248,45 @@ TEST_CASE("Graph With Mixture of Good and Bad Nodes Test", "[weight=5]"){
     REQUIRE(g1_it == g1_map.end());
     REQUIRE(g_it == g_map.end());
 }
+
+
+TEST_CASE("BFS Small Test", "[weight=5]"){
+    Graph g = Graph();
+    g.readIn("data/bfs_small.txt");
+    std::vector<Node> bfs_vect = g.Bfs("Desi", "Ruben");
+    std::map<std::string, Node> g_map = g.get_map();
+    std::vector<Node> manual_vect = {g_map["Desi"], g_map["Matt"], g_map["Ruben"]};
+
+    //Loop through both vectors to see if they match
+    std::vector<Node>::iterator bfs_it = bfs_vect.begin();
+    std::vector<Node>::iterator man_it = manual_vect.begin();
+
+    REQUIRE(bfs_vect.empty() == manual_vect.empty());
+    
+    while(bfs_it != bfs_vect.end() && man_it != manual_vect.end()){
+        //Check Edges
+        Node g_node = *bfs_it;
+        Node g1_node = *man_it;
+        std::vector<Edge>::iterator g_edge_it = g_node.edge_list_.begin();
+        std::vector<Edge>::iterator g1_edge_it = g1_node.edge_list_.begin();
+        REQUIRE(g_node.edge_list_.empty() == g1_node.edge_list_.empty());
+        while(g_edge_it != g_node.edge_list_.end()){
+            REQUIRE(g_edge_it->source_ == g1_edge_it->source_);
+            REQUIRE(g_edge_it->destination_ == g1_edge_it->destination_);
+            g_edge_it++;
+            g1_edge_it++;
+        }
+        REQUIRE(g1_edge_it == g1_node.edge_list_.end());
+        REQUIRE(g_edge_it == g_node.edge_list_.end());
+        bfs_it++;
+        man_it++;
+    }
+    REQUIRE(bfs_it == bfs_vect.end());
+    REQUIRE(man_it == manual_vect.end());
+
+}
+
+
+TEST_CASE("Test", "[weight=5]"){
+    REQUIRE("1" == "1");
+}
