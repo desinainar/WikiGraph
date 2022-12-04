@@ -7,11 +7,16 @@ int main()
     g.readIn("Book3.txt");
     g.print();
     std::vector<Node> answer = g.Bfs("1", "5");
+    std::vector<double> central = g.Brandes();
     std::cout <<"here\n";
     if (answer.empty()) {std::cout << "empty\n";}
     else {
         for (Node node : answer) {
             std::cout << node.title_ << " -> "; 
+        }
+        std::cout << "\n";
+        for (double next : central) {
+            std::cout << next << " ->";
         }
     }
     

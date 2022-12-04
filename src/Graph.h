@@ -14,7 +14,7 @@ class Graph {
     void print();
     std::vector<Node> Bfs(std::string source, std::string target);
     std::map<std::string, Node> get_map() {return node_map;}
-    std::vector<int> Brandes();
+    std::vector<double> Brandes();
     std::vector<Node> Tarjans();
     private:
     std::map<std::string, Node> node_map;

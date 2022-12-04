@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <algorithm>
 using namespace std;
 
 //check to see if 2 graphs are identical
@@ -109,7 +110,31 @@ std::vector<Node> Graph::Bfs(std::string source, std::string target) {
 	return vector<Node>();
  }
 
-
+std::vector<double> Graph::Brandes() {
+	std::vector<double> centrality;
+	std::vector<std::vector<Node>> shortest_paths;
+	for (auto node1 : node_map) {
+		for (auto node2 : node_map) {
+			if (node1.second != node2.second) {
+				std::vector<Node> shortest_path = Bfs(node1.first, node2.first);
+				shortest_paths.push_back(shortest_path);
+			}
+		}
+	}
+	for (auto node : node_map) {
+		size_t count = 0;
+		for (auto path : shortest_paths) {
+			for (auto path_node : path) {
+				if (!(path_node != node.second)) {
+					count++;
+				}
+			}
+		}
+		double node_cen = static_cast<double>(count) / shortest_paths.size();
+		centrality.push_back(node_cen); 
+	}
+	return centrality;
+}
 
 
 
