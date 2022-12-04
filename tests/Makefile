@@ -4,7 +4,7 @@ CFLAGS=-g -o
 .RECIPEPREFIX := $(.RECIPEPREFIX) 
 
 test: node.o graph.o; \
-$(CC) $(CFLAGS) -o tests.cpp
+$(CC) $(CFLAGS) test tests.cpp
 
 node.o: ../src/Node.h; \
 $(CC) $(CFLAGS) -c ../src/Node.h
