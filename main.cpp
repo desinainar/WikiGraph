@@ -20,5 +20,14 @@ int main()
         }
     }
     
+    std::vector<std::vector<Node>> connected = g.Tarjans();
+    int count = 1;
+    for (auto component : connected) {
+        std::cout << "Component " << count << ":\n";
+        for (Node node : component) {
+            std::cout << node.title_ << " - ";
+        }
+        std::cout << "\n";
+    }
     return 0;
 }

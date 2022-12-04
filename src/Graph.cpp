@@ -135,8 +135,7 @@ std::vector<double> Graph::Brandes() {
 	}
 	return centrality;
 }
-#include <stack>
-std::vector<Node> Graph::Tarjans() {
+std::vector<std::vector<Node>> Graph::Tarjans() {
     std::vector<int> depth(node_map.size(), -1); //depth index for every node
     std::vector<std::vector<Node>> to_return; //contains each connected componenet
     std::vector<bool> onStack(node_map.size()); //bool to check if v has been on stack
@@ -144,12 +143,12 @@ std::vector<Node> Graph::Tarjans() {
     std::stack<Node> s;
     for (auto n : node_map) {
         if (depth[n.second.index_] == -1) {
-            to_return.push_back(strongconnect(n.second, depth index, s, onStack));
+            to_return.push_back(strongconnect(n.second, depth, index, s, onStack));
         }
     }
     return to_return;
 }
-std::vector<Node> Graph::strongconnect(Node n, std::vector<int> depth, int &index, std::stack &s, std::vector<bool> &onStack) {
+std::vector<Node> Graph::strongconnect(Node n, std::vector<int> depth, int &index, std::stack<Node> &s, std::vector<bool> &onStack) {
     int node_index = n.index_;
     depth[node_index] = index;
     n.lowlink = index;
@@ -158,12 +157,12 @@ std::vector<Node> Graph::strongconnect(Node n, std::vector<int> depth, int &inde
     onStack[node_index] = true;
     for (Edge edge : n.edge_list_) {
         Node w = node_map[edge.destination_];
-        w_index = w.index_;
+        int w_index = w.index_;
         if (depth[w_index] == -1) {
             strongconnect(w, depth, index, s, onStack);
-            n.lowlink = (n.lowlink < w.lowlink) n.lowlink:w.lowlink;
+            n.lowlink = (n.lowlink < w.lowlink) ? n.lowlink:w.lowlink;
         } else if(onStack[w_index]) {
-            n.lowlink = (n.lowlink < depth[w_index]) n.lowlink:depth[w_index];
+            n.lowlink = (n.lowlink < depth[w_index]) ? n.lowlink:depth[w_index];
         }
     }
     if (n.lowlink == depth[node_index]) {

@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <map>
+#include <stack>
 class Graph {
     public:    
     
@@ -15,8 +16,8 @@ class Graph {
     std::vector<Node> Bfs(std::string source, std::string target);
     std::map<std::string, Node> get_map() {return node_map;}
     std::vector<double> Brandes();
-    std::vector<Node> Tarjans();
-    std::vector<Node> strongconnect(Node n, std::vector<int> depth, int &index, std::stack &s, std::vector<bool> &onStack);
+    std::vector<std::vector<Node>> Tarjans();
+    std::vector<Node> strongconnect(Node n, std::vector<int> depth, int &index, std::stack<Node> &s, std::vector<bool> &onStack);
     private:
     std::map<std::string, Node> node_map;
 };
