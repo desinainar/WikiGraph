@@ -46,11 +46,12 @@ void Graph::readIn(std::string tsv) {
 			Node* it = &node_map[current_tab[0]]; //access of create new key with currenttab[0]
 			if (it->title_ == "empty") {
 				*it = Node(current_tab[0], count);
+				count++;
 			}
 			current_tab[1].pop_back();
 			it->add_edge(current_tab[1]);
 			//node_map[current_tab[0]] = *it;
-			count++;
+			
 		}
 		
 	}
@@ -64,29 +65,70 @@ void Graph::print(){
 }
 
 //add heap from lab
-std::vector<Node> Graph::Bfs(std::string source) { 
- 	std::vector<Node> to_return;
-	queue<string> traversal;
-	map<string, bool> visited;
+std::vector<Node> Graph::Bfs(std::string source, std::string target) { 
+ 	std::vector<Node> pred;
+	vector<int> dist;
+	queue<Node> traversal;
 	
-	traversal.push(source);
-	visited[source] = true;
+	//map<Node, bool> visited; //to check if ivisited
+	auto curr = node_map[source];
+	for (auto node : node_map) {
+		dist.push_back(-1);
+		pred.push_back(Node());
+	}
+	int srcind = curr.index_;
+	curr.explored_ = true;
+	dist[srcind]= 0;
+	traversal.push(curr);
+
 	while (!traversal.empty()) {
-		string article = traversal.front();
+		Node article = traversal.front();
 		traversal.pop();
-		for (Edge e : node_map[article].edge_list_) {
-			if (visited[e.destination_] == false) {
-				traversal.push(e.destination_);
-				visited[e.destination_] = true;
+		for (Edge e : article.edge_list_) {
+			auto next_article = node_map[e.destination_];
+			if (next_article.explored_ == false) {
+				traversal.push(next_article);
+				next_article.explored_ = true;
+				dist[next_article.index_] =  dist[next_article.index_] + 1;
+				pred[next_article.index_] = article;
+			}
+			if (next_article.title_ == target) {
+				Node path = node_map[target];
+				vector<Node> to_return;
+				to_return.push_back(path);
+				while (pred[path.index_].title_ != "empty") {
+					auto it = to_return.begin();
+					to_return.insert( it, pred[path.index_]);
+					path = pred[path.index_];
+				}
+				return to_return;
 			}
 		}
 	}
-
-	return std::vector<Node>();
+	
+	return vector<Node>();
  }
 
 
 
+
+
+
+
+
+
+
+
+
+/*
+For every node v in V , set CB(v) = 0.
+2. For each node s in V , use a BFS algorithm to find all the shortest paths
+between s and all other nodes. Store all these paths for each pair s,t.
+3. For each pair s,t, count the number of times v appears in the stored paths
+to give σ(s, t|v) and divide by the total number of paths between s and t
+(i.e., σ(s, t)). Add the result to CB(v).
+4. CB(v) gives the final result.
+*/
 
 
 

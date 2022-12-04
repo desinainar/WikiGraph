@@ -13,8 +13,8 @@ struct Node{
     int index_; //in lieu of a full adjacency list
     //Constructor:
     Node() : title_("empty"){}
-    Node(string title) : title_(title) { }
-    Node(string title, int index) : title_(title), index_(index) { }
+    Node(string title) : title_(title), explored_(false) { }
+    Node(string title, int index) : title_(title), index_(index), explored_(false) { }
 
     //Adding an edge to a node
     void add_edge(string page_name){

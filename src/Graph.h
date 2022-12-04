@@ -12,8 +12,8 @@ class Graph {
     //read a tsv and load into
     void readIn(std::string tsv);
     void print();
-    std::vector<Node> Bfs(std::string source);
-
+    std::vector<Node> Bfs(std::string source, std::string target);
+    std::map<std::string, Node> get_map() {return node_map;}
 
     private:
     std::map<std::string, Node> node_map;
