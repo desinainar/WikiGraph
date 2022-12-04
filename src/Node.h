@@ -11,6 +11,7 @@ struct Node{
     vector<Edge> edge_list_;
     bool explored_;
     int index_; //in lieu of a full adjacency list
+    int lowlink; //for tarjans
     //Constructor:
     Node() : title_("empty"){}
     Node(string title) : title_(title), explored_(false) { }
