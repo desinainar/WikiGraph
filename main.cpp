@@ -6,9 +6,13 @@ int main()
     Graph g = Graph();
     g.readIn("Book3.txt");
     g.print();
+    std::cout<<"---------------------------------\n\n";
     std::vector<Node> answer = g.Bfs("1", "5");
+    for (Node node : answer) {
+        std::cout << node.title_ << " -> ";
+    }
+    std::cout<<"\n---------------------------------\n";
     std::vector<double> central = g.Brandes();
-    std::cout <<"here\n";
     if (answer.empty()) {std::cout << "empty\n";}
     else {
         for (Node node : answer) {
@@ -19,7 +23,7 @@ int main()
             std::cout << next << " ->";
         }
     }
-    
+    std::cout<<"\n---------------------------------\n";
     std::vector<std::vector<Node>> connected = g.Tarjans();
     int count = 1;
     for (auto component : connected) {

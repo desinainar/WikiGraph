@@ -86,23 +86,26 @@ std::vector<Node> Graph::Bfs(std::string source, std::string target) {
 		Node article = traversal.front();
 		traversal.pop();
 		for (Edge e : article.edge_list_) {
-			auto next_article = node_map[e.destination_];
-			if (next_article.explored_ == false) {
-				traversal.push(next_article);
-				next_article.explored_ = true;
-				dist[next_article.index_] =  dist[next_article.index_] + 1;
-				pred[next_article.index_] = article;
-			}
-			if (next_article.title_ == target) {
-				Node path = node_map[target];
-				vector<Node> to_return;
-				to_return.push_back(path);
-				while (pred[path.index_].title_ != "empty") {
-					auto it = to_return.begin();
-					to_return.insert( it, pred[path.index_]);
-					path = pred[path.index_];
+			
+			if (node_map.find(e.destination_) != node_map.end()) {
+				auto next_article = node_map.at(e.destination_);
+				if (next_article.explored_ == false) {
+					traversal.push(next_article);
+					next_article.explored_ = true;
+					dist[next_article.index_] =  dist[next_article.index_] + 1;
+					pred[next_article.index_] = article;
 				}
-				return to_return;
+				if (next_article.title_ == target) {
+					Node path = node_map[target];
+					vector<Node> to_return;
+					to_return.push_back(path);
+					while (pred[path.index_].title_ != "empty") {
+						auto it = to_return.begin();
+						to_return.insert( it, pred[path.index_]);
+						path = pred[path.index_];
+					}
+					return to_return;
+				}
 			}
 		}
 	}
@@ -135,23 +138,27 @@ std::vector<double> Graph::Brandes() {
 	}
 	return centrality;
 }
+
+
+
 std::vector<std::vector<Node>> Graph::Tarjans() {
     std::vector<int> depth(node_map.size(), -1); //depth index for every node
     std::vector<std::vector<Node>> to_return; //contains each connected componenet
     std::vector<bool> onStack(node_map.size()); //bool to check if v has been on stack
+	std::vector<int> lowlinks(node_map.size());
     int index = 0;
     std::stack<Node> s;
     for (auto n : node_map) {
         if (depth[n.second.index_] == -1) {
-            to_return.push_back(strongconnect(n.second, depth, index, s, onStack));
+            to_return.push_back(strongconnect(n.second, depth, index, s, onStack, lowlinks));
         }
     }
     return to_return;
 }
-std::vector<Node> Graph::strongconnect(Node n, std::vector<int> depth, int &index, std::stack<Node> &s, std::vector<bool> &onStack) {
+std::vector<Node> Graph::strongconnect(Node n, std::vector<int> depth, int &index, std::stack<Node> &s, std::vector<bool> &onStack, std::vector<int> &lowlinks) {
     int node_index = n.index_;
     depth[node_index] = index;
-    n.lowlink = index;
+    lowlinks[node_index] = index;
     index++;
     s.push(n);
     onStack[node_index] = true;
@@ -159,13 +166,13 @@ std::vector<Node> Graph::strongconnect(Node n, std::vector<int> depth, int &inde
         Node w = node_map[edge.destination_];
         int w_index = w.index_;
         if (depth[w_index] == -1) {
-            strongconnect(w, depth, index, s, onStack);
-            n.lowlink = (n.lowlink < w.lowlink) ? n.lowlink:w.lowlink;
+            strongconnect(w, depth, index, s, onStack, lowlinks);
+            lowlinks[node_index] = (lowlinks[node_index] < lowlinks[w_index]) ? lowlinks[node_index ]: lowlinks[w_index];
         } else if(onStack[w_index]) {
-            n.lowlink = (n.lowlink < depth[w_index]) ? n.lowlink:depth[w_index];
+            lowlinks[node_index] = (lowlinks[node_index] < depth[w_index]) ? lowlinks[node_index]:depth[w_index];
         }
     }
-    if (n.lowlink == depth[node_index]) {
+    if (lowlinks[node_index] == depth[node_index]) {
         std::vector<Node> to_return;
         Node curr = s.top();
         s.pop();
@@ -177,7 +184,6 @@ std::vector<Node> Graph::strongconnect(Node n, std::vector<int> depth, int &inde
     }
     return std::vector<Node>();
 }
-
 
 
 
