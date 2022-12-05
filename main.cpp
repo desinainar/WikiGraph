@@ -27,7 +27,9 @@ int main()
     std::vector<std::vector<Node>> connected = g.Tarjans();
     int count = 1;
     for (auto component : connected) {
+        if (component.empty()) {std::cout << "Empty\n";}
         std::cout << "Component " << count << ":\n";
+        count++;
         for (Node node : component) {
             std::cout << node.title_ << " - ";
         }

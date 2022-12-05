@@ -145,44 +145,52 @@ std::vector<std::vector<Node>> Graph::Tarjans() {
     std::vector<int> depth(node_map.size(), -1); //depth index for every node
     std::vector<std::vector<Node>> to_return; //contains each connected componenet
     std::vector<bool> onStack(node_map.size()); //bool to check if v has been on stack
-	std::vector<int> lowlinks(node_map.size());
-    int index = 0;
+	std::vector<int> lowlinks(node_map.size(), -1);
+    //int index = 0;
     std::stack<Node> s;
     for (auto n : node_map) {
         if (depth[n.second.index_] == -1) {
-            to_return.push_back(strongconnect(n.second, depth, index, s, onStack, lowlinks));
+			Node pass = n.second;
+			auto to_add = strongconnect(pass, depth, s, onStack, lowlinks);
+			if (!to_add.empty()) {to_return.push_back(to_add);}
         }
     }
     return to_return;
 }
-std::vector<Node> Graph::strongconnect(Node n, std::vector<int> depth, int &index, std::stack<Node> &s, std::vector<bool> &onStack, std::vector<int> &lowlinks) {
-    int node_index = n.index_;
+std::vector<Node> Graph::strongconnect(Node n, std::vector<int> depth, std::stack<Node> &s, std::vector<bool> &onStack, std::vector<int> &lowlinks) {
+	std::vector<Node> to_return;
+    static int index = 0;
+	int node_index = n.index_;
     depth[node_index] = index;
     lowlinks[node_index] = index;
     index++;
     s.push(n);
     onStack[node_index] = true;
     for (Edge edge : n.edge_list_) {
-        Node w = node_map[edge.destination_];
-        int w_index = w.index_;
-        if (depth[w_index] == -1) {
-            strongconnect(w, depth, index, s, onStack, lowlinks);
-            lowlinks[node_index] = (lowlinks[node_index] < lowlinks[w_index]) ? lowlinks[node_index ]: lowlinks[w_index];
-        } else if(onStack[w_index]) {
-            lowlinks[node_index] = (lowlinks[node_index] < depth[w_index]) ? lowlinks[node_index]:depth[w_index];
-        }
+        if (node_map.find(edge.destination_) != node_map.end()) {
+			Node w = node_map[edge.destination_];
+			int w_index = w.index_;
+			if (depth[w_index] == -1) {
+				auto to_add = strongconnect(w, depth, s, onStack, lowlinks);
+				to_return.insert(to_return.end(), to_add.begin(), to_add.end());
+				lowlinks[node_index] = (lowlinks[node_index] < lowlinks[w_index]) ? lowlinks[node_index ]: lowlinks[w_index];
+			} else if(onStack[w_index]) {
+				lowlinks[node_index] = (lowlinks[node_index] < depth[w_index]) ? lowlinks[node_index]:depth[w_index];
+			}
+		}
+		
     }
+	Node top;
+	
     if (lowlinks[node_index] == depth[node_index]) {
-        std::vector<Node> to_return;
-        Node curr = s.top();
-        s.pop();
-        while (curr != n) {
-            onStack[curr.index_] = false;
-            to_return.push_back(curr);
+        while (top != n && s.size() >= 1) {
+            top = s.top();
+        	s.pop();
+			onStack[top.index_] = false;
+            to_return.push_back(top);
         }
-        return to_return;
     }
-    return std::vector<Node>();
+    return to_return;
 }
 
 
@@ -203,33 +211,3 @@ to give σ(s, t|v) and divide by the total number of paths between s and t
 */
 
 
-
-/*
-while prev[u] is defined:                 // Construct the shortest path with a stack S
-4      insert u at the beginning of S          // Push the vertex onto the stack
-5      u ← prev[u]                             // Traverse from target to source
-6  end while
-
-
-
-
-function Dijkstra(Graph, source):
- 2      
- 3      for each vertex v in Graph.Vertices:
- 4          dist[v] ← INFINITY
- 5          prev[v] ← UNDEFINED
- 6          add v to Q
- 7      dist[source] ← 0
- 8      
- 9      while Q is not empty:
-10          u ← vertex in Q with min dist[u]
-11          remove u from Q
-12          
-13          for each neighbor v of u still in Q:
-14              alt ← dist[u] + Graph.Edges(u, v)
-15              if alt < dist[v]:
-16                  dist[v] ← alt
-17                  prev[v] ← u
-18
-19      return dist[], prev[]
-*/
