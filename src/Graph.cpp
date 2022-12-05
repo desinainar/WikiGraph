@@ -113,8 +113,9 @@ std::vector<Node> Graph::Bfs(std::string source, std::string target) {
 	return vector<Node>();
  }
 
-std::vector<double> Graph::Brandes() {
-	std::vector<double> centrality;
+std::map<string, double> Graph::Brandes() {
+	std::vector<string> node_titles;
+    std::vector<double> centrality;
 	std::vector<std::vector<Node>> shortest_paths;
 	for (auto node1 : node_map) {
 		for (auto node2 : node_map) {
@@ -134,9 +135,14 @@ std::vector<double> Graph::Brandes() {
 			}
 		}
 		double node_cen = static_cast<double>(count) / shortest_paths.size();
+        node_titles.push_back(node.second.title_);
 		centrality.push_back(node_cen); 
 	}
-	return centrality;
+    std::map<string, double> brandes_map;
+    for (size_t i = 0; i < node_titles.size(); i++) {
+        brandes_map[node_titles[i]] = centrality[i];
+    }
+	return brandes_map;
 }
 
 

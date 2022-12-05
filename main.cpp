@@ -12,15 +12,15 @@ int main()
         std::cout << node.title_ << " -> ";
     }
     std::cout<<"\n---------------------------------\n";
-    std::vector<double> central = g.Brandes();
+    std::map<string, double> central = g.Brandes();
     if (answer.empty()) {std::cout << "empty\n";}
     else {
         for (Node node : answer) {
             std::cout << node.title_ << " -> "; 
         }
         std::cout << "\n";
-        for (double next : central) {
-            std::cout << next << " ->";
+        for (auto it : central) {
+            std::cout << it.first << ": " << it.second << " ->";
         }
     }
     std::cout<<"\n---------------------------------\n";
