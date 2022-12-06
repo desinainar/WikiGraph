@@ -21,7 +21,12 @@ struct Node{
     void add_edge(string page_name){
         edge_list_.emplace_back(Edge(title_, page_name));
     }
-
+    bool operator<(const Node& rhs) const {
+        return index_ < rhs.index_;
+    }
+    bool operator==(const Node& rhs) const{
+        return (title_ == rhs.title_);
+    }
     //Returns bool if desired edge exists in edge list:
     bool edge_exists(string page_name){
         for (auto & element : edge_list_)
