@@ -286,6 +286,71 @@ TEST_CASE("BFS Small Test", "[weight=5]"){
 
 }
 
+TEST_CASE("Tarjans no connections", "[weight=5]"){
+    Graph g = Graph();
+    g.readIn("Final proj/WikiGraph/tests/data/Tarjans1.txt");
+    std::vector<std::set<Node>> answer = g.Tarjans();
+    REQUIRE(answer.size() == 3);
+}
+
+
+TEST_CASE("Tarjan's algorithm", "[weight=5]") {
+    // Test a simple case with only one connected component
+    SECTION("Single connected component") {
+        Graph a = Graph();
+        a.readIn("data/Tarjans2.txt");
+        vector<set<Node>> connected_components = a.Tarjans();
+        
+        REQUIRE(connected_components.size() == 1);
+        REQUIRE(connected_components[0] == set<Node>({Node("1"),Node("2"),Node("3"),Node("4"),Node("5")}));
+    }
+
+    // Test a case with multiple connected components
+    SECTION("Multiple connected components") {
+        Graph b = Graph();
+        b.readIn("data/Tarjans3.txt");
+        vector<set<Node>> connected_components = b.Tarjans();
+
+        REQUIRE(connected_components.size() == 2);
+        REQUIRE(connected_components[0] == set<Node>({Node("1"),Node("2"),Node("3"),Node("4"),Node("5")}));
+        REQUIRE(connected_components[1] == set<int>({Node("6")}));
+    }
+
+    // Test a case with no connected components
+    SECTION("No connected components") {
+        Graph c = Graph();
+
+        vector<set<Node>> connected_components = Tarjans();
+
+        REQUIRE(connected_components.size() == 0);
+    }
+
+    // Test a case with a disconnected graph
+    SECTION("Disconnected graph") {
+        Graph d = Graph();
+        d.readIn("data/Tarjans4.txt");
+
+        vector<set<Node>> connected_components = d.Tarjans();
+
+        REQUIRE(connected_components.size() == 3);
+        REQUIRE(connected_components[0] == set<int>({Node("1"),Node("2")}));
+        REQUIRE(connected_components[1] == set<int>({Node("3"),Node("4")}));
+        REQUIRE(connected_components[2] == set<int>({Node("5")}));
+    }
+
+    // Test a case with a graph that contains a cycle
+    SECTION("Graph with a cycle") {
+        
+        Graph e = Graph();
+        e.readIn("data/Tarjans5.txt");
+
+        vector<set<Node>> connected_components = e.Tarjans();
+
+        REQUIRE(connected_components.size() == 1);
+        REQUIRE(connected_components[0] == set<int>({Node("1"),Node("2"),Node("3"),Node("4"),Node("5")}));
+    }
+}
+
 
 TEST_CASE("Test", "[weight=5]"){
     REQUIRE("1" == "1");

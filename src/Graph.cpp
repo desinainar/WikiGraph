@@ -55,6 +55,7 @@ std::string Graph::utf8_decoder(const std::string& encodedString)
     }
 	return decodedString;
 }
+
 void Graph::readIn(std::string tsv) {
 	ifstream in(tsv);
     if (in.fail()) {
