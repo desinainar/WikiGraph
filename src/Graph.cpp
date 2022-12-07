@@ -1,9 +1,7 @@
 #include"Graph.h"
 #include <queue>
 #include <fstream>
-#include <iostream>
 #include <string>
-#include <vector>
 #include <sstream>
 #include <algorithm>
 using namespace std;
@@ -28,6 +26,35 @@ void Graph::addNode(string title, string destination) {
 	it->add_edge(destination);
 }
 
+
+std::string Graph::utf8_decoder(const std::string& encodedString)
+{
+    std::string decodedString;
+    for(size_t i = 0; i < encodedString.length(); i++)
+    {
+        if(encodedString[i] == '%' && i + 2 < encodedString.length())
+        {
+            // Read the two characters after the % sign
+            std::string hexCode = encodedString.substr(i + 1, 2);
+
+            // Convert the hexadecimal code to an integer value
+            int asciiValue = stoi(hexCode, nullptr, 16);
+
+            // Append the corresponding ASCII character to the decoded string
+            decodedString += static_cast<char>(asciiValue);
+
+            // Skip the two characters we just read
+            i += 2;
+        }
+        else
+        {
+            // If the character is not part of a %xx sequence, just append it to
+            // the decoded string
+            decodedString += encodedString[i];
+        }
+    }
+	return decodedString;
+}
 void Graph::readIn(std::string tsv) {
 	ifstream in(tsv);
     if (in.fail()) {
@@ -41,19 +68,19 @@ void Graph::readIn(std::string tsv) {
 		std::stringstream ss(line);
 		std::vector<std::string> current_tab;
 		std::string tmp;
-		if (line.find("%") == string::npos) {
-			for (std::string each; std::getline(ss, each, '\t'); current_tab.push_back(each)); // put each value in array
-		
-			Node* it = &node_map[current_tab[0]]; //access of create new key with currenttab[0]
-			if (it->title_ == "empty") {
-				*it = Node(current_tab[0], count);
-				count++;
-			}
-			current_tab[1].pop_back();
-			it->add_edge(current_tab[1]);
-			//node_map[current_tab[0]] = *it;
-			
+		if (line.find("%") != string::npos) {
+			line = (utf8_decoder(line));
 		}
+		for (std::string each; std::getline(ss, each, '\t'); current_tab.push_back(each)); // put each value in array
+	
+		Node* it = &node_map[current_tab[0]]; //access of create new key with currenttab[0]
+		if (it->title_ == "empty") {
+			*it = Node(current_tab[0], count);
+			count++;
+		}
+		current_tab[1].pop_back();
+		it->add_edge(current_tab[1]);
+		//node_map[current_tab[0]] = *it;
 		
 	}
 }

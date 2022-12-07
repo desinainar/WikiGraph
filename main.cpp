@@ -6,6 +6,10 @@ int main()
     Graph g = Graph();
     g.readIn("Book3.txt");
     g.print();
+    std::string to = "%C3%81ed%C3%A1n_mac_Gabr%C3%A1in";
+    std::string decode = g.utf8_decoder(to);
+    std::cout << decode << "\n";
+    /*
     std::cout<<"---------------------------------\n\n";
     std::vector<Node> answer = g.Bfs("1", "5");
     for (Node node : answer) {
@@ -35,5 +39,6 @@ int main()
         }
         std::cout << "\n";
     }
+    */
     return 0;
 }
