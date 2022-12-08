@@ -302,7 +302,8 @@ TEST_CASE("Tarjan's algorithm", "[weight=5]") {
         vector<set<Node>> connected_components = a.Tarjans();
         
         REQUIRE(connected_components.size() == 1);
-        REQUIRE(connected_components[0] == set<Node>({Node("1"),Node("2"),Node("3"),Node("4"),Node("5")}));
+        Node nodes[] = {Node("1"),Node("2"),Node("3"),Node("4"),Node("5")};
+        REQUIRE(connected_components[0] == set<Node>(nodes, nodes + 5));
     }
 
     // Test a case with multiple connected components
@@ -312,15 +313,16 @@ TEST_CASE("Tarjan's algorithm", "[weight=5]") {
         vector<set<Node>> connected_components = b.Tarjans();
 
         REQUIRE(connected_components.size() == 2);
-        REQUIRE(connected_components[0] == set<Node>({Node("1"),Node("2"),Node("3"),Node("4"),Node("5")}));
-        REQUIRE(connected_components[1] == set<int>({Node("6")}));
+        Node nodes[] = {Node("1"),Node("2"),Node("3"),Node("4"),Node("5")};
+        REQUIRE(connected_components[0] == set<Node>(nodes, nodes + 5));
+        REQUIRE(connected_components[1] == set<Node>({Node("6")}));
     }
 
     // Test a case with no connected components
     SECTION("No connected components") {
         Graph c = Graph();
 
-        vector<set<Node>> connected_components = Tarjans();
+        vector<set<Node>> connected_components = c.Tarjans();
 
         REQUIRE(connected_components.size() == 0);
     }
@@ -331,11 +333,10 @@ TEST_CASE("Tarjan's algorithm", "[weight=5]") {
         d.readIn("data/Tarjans4.txt");
 
         vector<set<Node>> connected_components = d.Tarjans();
-
         REQUIRE(connected_components.size() == 3);
-        REQUIRE(connected_components[0] == set<int>({Node("1"),Node("2")}));
-        REQUIRE(connected_components[1] == set<int>({Node("3"),Node("4")}));
-        REQUIRE(connected_components[2] == set<int>({Node("5")}));
+        REQUIRE(connected_components[0] == set<Node>({Node("1"),Node("2")}));
+        REQUIRE(connected_components[1] == set<Node>({Node("3"),Node("4")}));
+        REQUIRE(connected_components[2] == set<Node>({Node("5")}));
     }
 
     // Test a case with a graph that contains a cycle
@@ -347,7 +348,7 @@ TEST_CASE("Tarjan's algorithm", "[weight=5]") {
         vector<set<Node>> connected_components = e.Tarjans();
 
         REQUIRE(connected_components.size() == 1);
-        REQUIRE(connected_components[0] == set<int>({Node("1"),Node("2"),Node("3"),Node("4"),Node("5")}));
+        REQUIRE(connected_components[0] == set<Node>({Node("1"),Node("2"),Node("3"),Node("4"),Node("5")}));
     }
 }
 
