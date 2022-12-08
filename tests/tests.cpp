@@ -355,3 +355,12 @@ TEST_CASE("Tarjan's algorithm", "[weight=5]") {
 TEST_CASE("Test", "[weight=5]"){
     REQUIRE("1" == "1");
 }
+
+//TODO: (MATT)
+/*
+Check equals operator for Tartans and BFS 
+Eliminate Only bad nodes test for compatability with decoder
+change read-in test cases to have encoded page titles, need to create new tsv's for this
+Brandes test cases
+
+*/
