@@ -1,14 +1,14 @@
 #include "Graph.h"
 int main()
 {
-    // g++ -o main main.cpp src/Node.cpp src/Graph.cpp -Isrc    to compile without make file
+    // g++ -o main main.cpp src/Node.cpp src/Graph.cpp -Isrc -g    to compile without make file
     // ./main                                                to run
     Graph g = Graph();
-    g.readIn("Book3.txt");
-    g.print();
-    std::string to = "%C3%81ed%C3%A1n_mac_Gabr%C3%A1in";
-    std::string decode = g.utf8_decoder(to);
-    std::cout << decode << "\n";
+    g.readIn("/workspaces/CS_225/Final proj/WikiGraph/tests/data/Tarjans5.txt");
+    //g.print();
+    //Graph badreadin = Graph();
+    //badreadin.readIn("gabran.txt");
+    //badreadin.print();
     /*
     std::cout<<"---------------------------------\n\n";
     std::vector<Node> answer = g.Bfs("1", "5");
@@ -26,7 +26,7 @@ int main()
         for (auto it : central) {
             std::cout << it.first << ": " << it.second << " ->";
         }
-    }
+    }*/
     std::cout<<"\n---------------------------------\n";
     std::vector<std::set<Node>> connected = g.Tarjans();
     int count = 1;
@@ -39,6 +39,6 @@ int main()
         }
         std::cout << "\n";
     }
-    */
+    
     return 0;
 }
