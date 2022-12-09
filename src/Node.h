@@ -34,8 +34,39 @@ struct Node{
         return false ;
     }
 
+std::string utf8_decode(const std::string& encodedString)
+{
+    std::string decodedString;
+    for(size_t i = 0; i < encodedString.length(); i++)
+    {
+        if(encodedString[i] == '%' && i + 2 < encodedString.length())
+        {
+            // Read the two characters after the % sign
+            std::string hexCode = encodedString.substr(i + 1, 2);
+
+            // Convert the hexadecimal code to an integer value
+            int asciiValue = stoi(hexCode, nullptr, 16);
+
+            // Append the corresponding ASCII character to the decoded string
+            decodedString += static_cast<char>(asciiValue);
+
+            // Skip the two characters we just read
+            i += 2;
+        }
+        else
+        {
+            // If the character is not part of a %xx sequence, just append it to
+            // the decoded string
+            decodedString += encodedString[i];
+        }
+    }
+	return decodedString;
+}
+
+
     //Prints the contents of the Node
     void print(){
+        if (title_.find("%") != string::npos)
         cout << "Title: " << title_ << endl;
         cout << "Edges (" << edge_list_.size() << ") " << endl;
         for (auto & elem : edge_list_)

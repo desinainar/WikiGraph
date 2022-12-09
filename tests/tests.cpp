@@ -294,8 +294,9 @@ TEST_CASE("Tarjans no connections", "[weight=5]"){
 }
 
 
-TEST_CASE("Tarjan's algorithm", "[weight=5]") {
-    // Test a simple case with only one connected component
+TEST_CASE("Tarjan's algorithm", "[weight=5]") { 
+    //Since Articles with no links cant be used as a path they are not made into Nodes
+    // which is why they arent included in connectivity since they dont provide any use to finding paths between articles
     SECTION("Single connected component") {
         Graph a = Graph();
         a.readIn("data/Tarjans2.txt");
