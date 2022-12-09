@@ -355,9 +355,15 @@ TEST_CASE("Tarjan's algorithm", "[weight=5]") {
         e.readIn("data/Tarjans5.txt");
 
         vector<set<Node>> connected_components = e.Tarjans();
-
+        std::vector<Node> nodes = {Node("1"),Node("2"),Node("3"),Node("4"),Node("5")};
+        std::vector<Node> to_check;
+        for (auto node : connected_components[0]) {
+            to_check.push_back(node);
+        }
         REQUIRE(connected_components.size() == 1);
         REQUIRE(connected_components[0].size() == 5);
+        REQUIRE(std::is_permutation(to_check.begin(), to_check.end(),nodes.begin(), nodes.end()));
+
     }
 }
 
