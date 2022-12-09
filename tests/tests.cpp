@@ -317,7 +317,7 @@ TEST_CASE("Tarjan's algorithm", "[weight=5]") {
     // Test a case with multiple connected components
     SECTION("Multiple connected components") {
         Graph b = Graph();
-        b.readIn("/workspaces/CS_225/Final proj/WikiGraph/tarjansmulti.txt");
+        b.readIn("/workspaces/CS_225/Final proj/WikiGraph/tests/data/tarjansmulti.txt");
         vector<set<Node>> connected_components = b.Tarjans();
 
         REQUIRE(connected_components.size() == 2);
