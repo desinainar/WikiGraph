@@ -293,7 +293,6 @@ TEST_CASE("Tarjans no connections", "[weight=5]"){
     REQUIRE(answer.size() == 0);
 }
 
-
 TEST_CASE("Tarjan's algorithm", "[weight=5]") { 
     //Since Articles with no links cant be used as a path they are not made into Nodes
     // which is why they arent included in connectivity since they dont provide any use to finding paths between articles
@@ -368,8 +367,21 @@ TEST_CASE("Tarjan's algorithm", "[weight=5]") {
 }
 
 
-TEST_CASE("Test", "[weight=5]"){
-    REQUIRE("1" == "1");
+TEST_CASE("Brandes Algorithm", "[weight=5]"){
+    SECTION("No connections") {
+        Graph a = Graph();
+        map<string, double> central = a.Brandes();
+        REQUIRE(central.empty());
+    }
+    SECTION("Correct centrality") {
+        Graph b = Graph();
+        b.readIn("data/bfs_small.txt");
+        map<string, double> central = b.Brandes();
+        REQUIRE(central["Baseball"] == (7.0/12));
+        REQUIRE(central["Desi"] == (6.0/12));
+        REQUIRE(central["Matt"] == (8.0/12));
+        REQUIRE(central["Ruben"] == (9.0/12));
+    }
 }
 
 //TODO: (MATT)

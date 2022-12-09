@@ -4,7 +4,7 @@ int main()
     // g++ -o main main.cpp src/Node.cpp src/Graph.cpp -Isrc -g    to compile without make file
     // ./main                                                to run
     Graph g = Graph();
-    g.readIn("/workspaces/CS_225/Final proj/WikiGraph/tests/data/Tarjans5.txt");
+    g.readIn("t");
     //g.print();
     //Graph badreadin = Graph();
     //badreadin.readIn("gabran.txt");
