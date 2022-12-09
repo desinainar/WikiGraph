@@ -27,34 +27,6 @@ void Graph::addNode(string title, string destination) {
 }
 
 
-std::string Graph::utf8_decoder(const std::string& encodedString)
-{
-    std::string decodedString;
-    for(size_t i = 0; i < encodedString.length(); i++)
-    {
-        if(encodedString[i] == '%' && i + 2 < encodedString.length())
-        {
-            // Read the two characters after the % sign
-            std::string hexCode = encodedString.substr(i + 1, 2);
-
-            // Convert the hexadecimal code to an integer value
-            int asciiValue = stoi(hexCode, nullptr, 16);
-
-            // Append the corresponding ASCII character to the decoded string
-            decodedString += static_cast<char>(asciiValue);
-
-            // Skip the two characters we just read
-            i += 2;
-        }
-        else
-        {
-            // If the character is not part of a %xx sequence, just append it to
-            // the decoded string
-            decodedString += encodedString[i];
-        }
-    }
-	return decodedString;
-}
 
 void Graph::readIn(std::string tsv) {
 	ifstream in(tsv);
@@ -72,14 +44,6 @@ void Graph::readIn(std::string tsv) {
 
 		for (std::string each; std::getline(ss, each, '\t'); current_tab.push_back(each)); // put each value in array
 		current_tab[1].pop_back();
-		//Decoding
-		if (current_tab[0].find("%") != string::npos) {
-			//current_tab[0] = (utf8_decoder(current_tab[0]));
-			std::string first = utf8_decoder(current_tab[0]);
-		}
-		if (current_tab[1].find("%") != string::npos) {
-			current_tab[1] = (utf8_decoder(current_tab[1]));
-		}
 		Node* it = &node_map[current_tab[0]]; //access of create new key with currenttab[0]
 		if (it->title_ == "empty") {
 			*it = Node(current_tab[0], count);

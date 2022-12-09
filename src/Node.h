@@ -66,8 +66,11 @@ std::string utf8_decode(const std::string& encodedString)
 
     //Prints the contents of the Node
     void print(){
-        if (title_.find("%") != string::npos)
-        cout << "Title: " << title_ << endl;
+        std::string to_use = title_;
+        if (title_.find("%") != string::npos) {
+            to_use = utf8_decode(title_);
+        }
+        cout << "Title: " << to_use << endl;
         cout << "Edges (" << edge_list_.size() << ") " << endl;
         for (auto & elem : edge_list_)
             elem.print();

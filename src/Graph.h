@@ -13,7 +13,6 @@ class Graph {
     void addNode(string title, string destination);
     //read a tsv and load into
     void readIn(std::string tsv);
-    std::string utf8_decoder(const std::string& encodedString);
     void print();
     std::vector<Node> Bfs(std::string source, std::string target);
     std::map<std::string, Node> get_map() {return node_map;}
