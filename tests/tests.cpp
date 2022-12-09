@@ -172,10 +172,10 @@ TEST_CASE("Graph with 2 Node Test", "[weight=5]"){
 }
 
 
-TEST_CASE("Graph Wih Only Bad Nodes Test", "[weight=5]"){
+TEST_CASE("Decoder Test", "[weight=5]"){
     //Graph With only bad nodes
     Graph badreadin = Graph();
-    badreadin.readIn("data/onlybadnodes.txt");
+    badreadin.readIn("data/OnlyDecoded.txt");
     Graph badmanual = Graph();
     std::map<std::string, Node> g1_map = badreadin.get_map();
     std::map<std::string, Node> g_map = badmanual.get_map();

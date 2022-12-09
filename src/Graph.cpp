@@ -69,17 +69,23 @@ void Graph::readIn(std::string tsv) {
 		std::stringstream ss(line);
 		std::vector<std::string> current_tab;
 		std::string tmp;
-		if (line.find("%") != string::npos) {
-			line = (utf8_decoder(line));
-		}
+
 		for (std::string each; std::getline(ss, each, '\t'); current_tab.push_back(each)); // put each value in array
-	
+		current_tab[1].pop_back();
+		//Decoding
+		if (current_tab[0].find("%") != string::npos) {
+			//current_tab[0] = (utf8_decoder(current_tab[0]));
+			std::string first = utf8_decoder(current_tab[0]);
+		}
+		if (current_tab[1].find("%") != string::npos) {
+			current_tab[1] = (utf8_decoder(current_tab[1]));
+		}
 		Node* it = &node_map[current_tab[0]]; //access of create new key with currenttab[0]
 		if (it->title_ == "empty") {
 			*it = Node(current_tab[0], count);
 			count++;
 		}
-		current_tab[1].pop_back();
+		
 		it->add_edge(current_tab[1]);
 		//node_map[current_tab[0]] = *it;
 		
@@ -139,7 +145,7 @@ std::vector<Node> Graph::Bfs(std::string source, std::string target) {
 	}
 	
 	return vector<Node>();
- }
+}
 
 std::map<string, double> Graph::Brandes() {
 	std::vector<string> node_titles;
