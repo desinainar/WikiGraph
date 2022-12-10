@@ -18,10 +18,10 @@ WikiGraph/
 |
 |--tests/
 |   |
-|   |--data/
+|   |--data/ *contains testing .tsv files*
 |
 |
-|--Documents/
+|--Documents/ *contains custom .tsv files*
 |
 |--README.md
 |
