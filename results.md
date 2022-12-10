@@ -6,5 +6,4 @@ The BFS is the core of this project and is used to find the shortest path betwee
 
 Brandes
 
-Tarjans algorithm is used to find strongly connected components within a graph, printing each component from strongest to weakest connections. To test Tarjan, used graphs with single and multiple connected components, as well as completely disjoint graphs, empty graphs, and graphs with cycles.
-    Connected components of the full dataset:
+Tarjans algorithm is used to find strongly connected components within a graph, printing each component from strongest to weakest connections. To test Tarjan, used graphs with single and multiple connected components, as well as completely disjoint graphs, empty graphs, and graphs with cycles. At first, we expected many seperate components to surface but on Wikipedia's data set and other datasets following a similar link patter, we found that there was more often than not, a very strongly connected component, and then individual straglers that did not have many links. When we looked further into this, we found that Wikipedia could be processed as a single strongly connected component, so it made sense that the segment of its data set had similar results.
