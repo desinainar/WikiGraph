@@ -12,7 +12,7 @@ class Graph {
     bool operator==(Graph g1);
     void addNode(string title, string destination);
     //read a tsv and load into
-    void readIn(std::string tsv);
+    void readIn(std::string tsv, int edge_max);
     void print();
     std::vector<Node> Bfs(std::string source, std::string target);
     std::map<std::string, Node> get_map() {return node_map;}

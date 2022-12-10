@@ -28,7 +28,7 @@ void Graph::addNode(string title, string destination) {
 
 
 
-void Graph::readIn(std::string tsv) {
+void Graph::readIn(std::string tsv, int edge_max) {
 	ifstream in(tsv);
     if (in.fail()) {
 		std::cout << "error" << std::endl;
@@ -49,8 +49,10 @@ void Graph::readIn(std::string tsv) {
 			*it = Node(current_tab[0], count);
 			count++;
 		}
+		if (it->edge_list_.size() < edge_max) {
+			it->add_edge(current_tab[1]);
+		}
 		
-		it->add_edge(current_tab[1]);
 		//node_map[current_tab[0]] = *it;
 		
 	}
@@ -65,16 +67,10 @@ void Graph::print(){
 
 //add heap from lab
 std::vector<Node> Graph::Bfs(std::string source, std::string target) { 
- 	std::vector<Node> pred;
-	vector<int> dist;
+ 	std::vector<Node> pred(node_map.size(), Node());
+	vector<int> dist(node_map.size(), -1);
 	queue<Node> traversal;
-	
-	//map<Node, bool> visited; //to check if ivisited
 	auto curr = node_map[source];
-	for (auto node : node_map) {
-		dist.push_back(-1);
-		pred.push_back(Node());
-	}
 	int srcind = curr.index_;
 	curr.explored_ = true;
 	dist[srcind]= 0;
@@ -84,9 +80,9 @@ std::vector<Node> Graph::Bfs(std::string source, std::string target) {
 		Node article = traversal.front();
 		traversal.pop();
 		for (Edge e : article.edge_list_) {
-			
-			if (node_map.find(e.destination_) != node_map.end()) {
-				auto next_article = node_map.at(e.destination_);
+			auto next_article_pair = node_map.find(e.destination_);
+			if (next_article_pair != node_map.end()) {
+				Node next_article = next_article_pair->second;
 				if (next_article.explored_ == false) {
 					traversal.push(next_article);
 					next_article.explored_ = true;

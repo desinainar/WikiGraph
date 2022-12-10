@@ -6,7 +6,17 @@ int main()
    
    
     Graph g = Graph();
-    g.readIn("links.txt");
+    cout << "Would you like to truncate edge lists? Y / N(Reccomended for Large Datasets)\n";
+    std::string answer;
+    cin >> answer;
+    int edge_max;
+    if (answer == "Y" || answer == "y" || answer == "Yes" || answer == "yes") {
+        cout << "What would you like the maximum to be?\n";
+        cin >> edge_max;
+    } else {
+        edge_max = 100;
+    }
+    g.readIn("Medium.txt", edge_max);
     int starting_page;
     int ending_page;
     
