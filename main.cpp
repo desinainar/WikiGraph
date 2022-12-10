@@ -1,8 +1,8 @@
 #include "Graph.h"
 int main()
 {
-    // g++ -g -o main main.cpp src/Node.cpp src/Graph.cpp -Isrc    to compile without make file
-    // ./main                                                to run
+    // g++ -g -o main main.cpp src/Node.cpp src/Graph.cpp -Isrc    to compile
+    // ./main                                                      to run
    
    
     Graph g = Graph();

@@ -12,12 +12,8 @@ using namespace std;
 #include <vector>
 #include <set>
 
-// navicate to tests directory
-// to compile: make test
-// to run:     ./test
-
-// //g++ -g -o test tests.cpp ../src/Node.cpp ../src/Graph.cpp          to compile without make file
-// // ./test                                                            to run
+//g++ -g -o test tests.cpp ../src/Node.cpp ../src/Graph.cpp          to compile
+//./test                                                             to run
 
 TEST_CASE("'==' operator test1", "[weight=5]") {
     Graph g = Graph();
