@@ -28,7 +28,7 @@ void Graph::addNode(string title, string destination) {
 
 
 
-void Graph::readIn(std::string tsv, int edge_max) {
+void Graph::readIn(std::string tsv) {
 	ifstream in(tsv);
     if (in.fail()) {
 		std::cout << "error" << std::endl;
@@ -36,7 +36,6 @@ void Graph::readIn(std::string tsv, int edge_max) {
 	}
 	std::string line;
 	int count = 0;
-	//node_list.push_back(Node(std::string, count)); //empty node
 	while (getline(in, line)) {
 		std::stringstream ss(line);
 		std::vector<std::string> current_tab;
@@ -47,14 +46,10 @@ void Graph::readIn(std::string tsv, int edge_max) {
 		Node* it = &node_map[current_tab[0]]; //access of create new key with currenttab[0]
 		if (it->title_ == "empty") {
 			*it = Node(current_tab[0], count);
+			nodes.push_back(*it);
 			count++;
 		}
-		if (it->edge_list_.size() < edge_max) {
-			it->add_edge(current_tab[1]);
-		}
-		
-		//node_map[current_tab[0]] = *it;
-		
+		it->add_edge(current_tab[1]);
 	}
 }
 
@@ -82,18 +77,18 @@ std::vector<Node> Graph::Bfs(std::string source, std::string target) {
 		for (Edge e : article.edge_list_) {
 			auto next_article_pair = node_map.find(e.destination_);
 			if (next_article_pair != node_map.end()) {
-				Node next_article = next_article_pair->second;
-				if (next_article.explored_ == false) {
-					traversal.push(next_article);
-					next_article.explored_ = true;
-					dist[next_article.index_] =  dist[next_article.index_] + 1;
-					pred[next_article.index_] = article;
+				Node *next_article = &next_article_pair->second;
+				if (next_article->explored_ == false) {
+					traversal.push(*next_article);
+					next_article->explored_ = true;
+					dist[next_article->index_] =  dist[next_article->index_] + 1;
+					pred[next_article->index_] = article;
 				}
-				if (next_article.title_ == target) {
+				if (next_article->title_ == target) {
 					Node path = node_map[target];
 					vector<Node> to_return;
 					to_return.push_back(path);
-					while (pred[path.index_].title_ != "empty") {
+					while (pred[path.index_].title_ != "empty" && pred[path.index_].title_ != source) {
 						auto it = to_return.begin();
 						to_return.insert( it, pred[path.index_]);
 						path = pred[path.index_];
@@ -199,22 +194,3 @@ std::set<Node> Graph::strongconnect(Node n, std::vector<int> depth, std::stack<N
     }
     return to_return;
 }
-
-
-
-
-
-
-
-
-/*
-For every node v in V , set CB(v) = 0.
-2. For each node s in V , use a BFS algorithm to find all the shortest paths
-between s and all other nodes. Store all these paths for each pair s,t.
-3. For each pair s,t, count the number of times v appears in the stored paths
-to give σ(s, t|v) and divide by the total number of paths between s and t
-(i.e., σ(s, t)). Add the result to CB(v).
-4. CB(v) gives the final result.
-*/
-
-
