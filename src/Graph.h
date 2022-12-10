@@ -18,7 +18,7 @@ class Graph {
     std::map<std::string, Node> get_map() {return node_map;}
     std::map<string, double> Brandes();
     std::vector<std::set<Node>> Tarjans();
-    std::set<Node> strongconnect(Node n, std::vector<int> depth, std::stack<Node> &s, std::vector<bool> &onStack, std::vector<int> &lowlinks);
+    std::set<Node> strongconnect(Node n, int &index, std::vector<int> &depth, std::stack<Node> &s, std::vector<bool> &onStack, std::vector<int> &lowlinks);
     std::vector<Node> getNodes() {return nodes;}
     private:
     std::map<std::string, Node> node_map;

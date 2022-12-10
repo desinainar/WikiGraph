@@ -141,15 +141,25 @@ std::vector<std::set<Node>> Graph::Tarjans() {
     std::vector<std::set<Node>> to_return; //contains each connected componenet
     std::vector<bool> onStack(node_map.size()); //bool to check if v has been on stack
 	std::vector<int> lowlinks(node_map.size(), -1);
-    //int index = 0;
+    int index = 0;
     std::stack<Node> s;
     for (auto n : node_map) {
         if (depth[n.second.index_] == -1) {
 			Node pass = n.second;
-			auto to_add = strongconnect(pass, depth, s, onStack, lowlinks);
+			auto to_add = strongconnect(pass, index, depth, s, onStack, lowlinks);
 			if (!to_add.empty()) {
-				if (!to_return.empty() && !includes(to_return.back().begin(), to_return.back().end(), to_add.begin(), to_add.end())) {
-					to_return.push_back(to_add);
+				if (!to_return.empty()) {
+					bool already= false;
+					for (std::set<Node> check: to_return) {
+						if(includes(check.begin(), check.end(), to_add.begin(), to_add.end())) {
+							check = (check.size() > to_add.size()) ? check : to_add;
+							already = true;
+							break;
+						}
+					}
+					if (!already) {
+						to_return.push_back(to_add);
+					}
 				} else if (to_return.empty()) {
 					to_return.push_back(to_add);
 				}
@@ -159,9 +169,8 @@ std::vector<std::set<Node>> Graph::Tarjans() {
 
     return to_return;
 }
-std::set<Node> Graph::strongconnect(Node n, std::vector<int> depth, std::stack<Node> &s, std::vector<bool> &onStack, std::vector<int> &lowlinks) {
+std::set<Node> Graph::strongconnect(Node n, int &index, std::vector<int> &depth, std::stack<Node> &s, std::vector<bool> &onStack, std::vector<int> &lowlinks) {
 	std::set<Node> to_return;
-    static int index = 0;
 	int node_index = n.index_;
     depth[node_index] = index;
     lowlinks[node_index] = index;
@@ -173,7 +182,7 @@ std::set<Node> Graph::strongconnect(Node n, std::vector<int> depth, std::stack<N
 			Node w = node_map[edge.destination_];
 			int w_index = w.index_;
 			if (depth[w_index] == -1) {
-				auto to_add = strongconnect(w, depth, s, onStack, lowlinks);
+				auto to_add = strongconnect(w, index, depth, s, onStack, lowlinks);
 				to_return.insert(to_add.begin(), to_add.end());
 				lowlinks[node_index] = (lowlinks[node_index] < lowlinks[w_index]) ? lowlinks[node_index ]: lowlinks[w_index];
 			} else if(onStack[w_index]) {

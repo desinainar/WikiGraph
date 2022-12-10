@@ -310,7 +310,7 @@ TEST_CASE("Tarjan's algorithm", "[weight=5]") {
     }
 
     // Test a case with multiple connected components
-    SECTION("Multiple connected components") {
+    SECTION("Multiple connected components") { //Simple multiple connections
         Graph b = Graph();
         b.readIn("data/tarjansmulti.txt");
         vector<set<Node>> connected_components = b.Tarjans();
@@ -319,6 +319,16 @@ TEST_CASE("Tarjan's algorithm", "[weight=5]") {
         Node nodes[] = {Node("1"),Node("2"),Node("3"),Node("4"),Node("5")};
         REQUIRE(connected_components[0].size() == 3);
         REQUIRE(connected_components[1].size() == 1);
+        REQUIRE(connected_components[1].begin()->title_ == "5");
+    }
+    SECTION("Multiple connected components 2") { //Mutliple connections with smaller being cycle
+        Graph b = Graph();
+        b.readIn("data/tarjansmulti_2.txt");
+        vector<set<Node>> connected_components = b.Tarjans();
+
+        REQUIRE(connected_components.size() == 2);
+        REQUIRE(connected_components[0].size() == 3);
+        REQUIRE(connected_components[1].size() == 2);
         REQUIRE(connected_components[1].begin()->title_ == "5");
     }
 
