@@ -62,6 +62,9 @@ int main()
         cin >> user_bfs;
     }
     cout << "\n";
+
+
+    //Tarjans:
     std::vector<std::set<Node>> tarjan_answer= g.Tarjans();
     cout << "Strongest connected components of given set:\n";
     int comp_count = 1;
@@ -78,6 +81,17 @@ int main()
         cout << "\n";
         comp_count++;
     }
+
+    //Brandes:
+    std::map<std::string, double> brandes_answer = g.Brandes();
+    int i = 0;
+    for(auto & elem : brandes_answer){
+        if(i > 10){
+            break;
+        }
+        cout << elem.first << ", " << elem.second << endl;
+    }
+
 
     return 0;
 }
