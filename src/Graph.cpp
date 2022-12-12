@@ -36,7 +36,7 @@ void Graph::readIn(std::string tsv) {
 	}
 	std::string line;
 	int count = 0;
-	while (getline(in, line)) {
+	while (getline(in, line)) { //Get current line of tsv
 		std::stringstream ss(line);
 		std::vector<std::string> current_tab;
 		std::string tmp;
@@ -62,7 +62,7 @@ void Graph::print(){
 
 //add heap from lab
 std::vector<Node> Graph::Bfs(std::string source, std::string target) { 
- 	std::vector<Node> pred(node_map.size(), Node());
+ 	std::vector<Node> pred(node_map.size(), Node()); //predecessor, stores paths
 	vector<int> dist(node_map.size(), -1);
 	queue<Node> traversal;
 	auto curr = node_map[source];
@@ -71,11 +71,11 @@ std::vector<Node> Graph::Bfs(std::string source, std::string target) {
 	dist[srcind]= 0;
 	traversal.push(curr);
 
-	while (!traversal.empty()) {
+	while (!traversal.empty()) { 
 		Node article = traversal.front();
 		traversal.pop();
 		for (Edge e : article.edge_list_) {
-			auto next_article_pair = node_map.find(e.destination_);
+			auto next_article_pair = node_map.find(e.destination_); //Find instead of operaor[] to make sure no new nodes are created
 			if (next_article_pair != node_map.end()) {
 				Node *next_article = &next_article_pair->second;
 				if (next_article->explored_ == false) {
@@ -88,7 +88,7 @@ std::vector<Node> Graph::Bfs(std::string source, std::string target) {
 					Node path = node_map[target];
 					vector<Node> to_return;
 					to_return.push_back(path);
-					while (pred[path.index_].title_ != "empty" && pred[path.index_].title_ != source) {
+					while (pred[path.index_].title_ != "empty" && pred[path.index_].title_ != source) { 
 						auto it = to_return.begin();
 						to_return.insert( it, pred[path.index_]);
 						path = pred[path.index_];
@@ -99,17 +99,17 @@ std::vector<Node> Graph::Bfs(std::string source, std::string target) {
 		}
 	}
 	
-	return vector<Node>();
+	return vector<Node>(); //If no path is found return an empty vector
 }
 
 std::map<string, double> Graph::Brandes() {
 	std::vector<string> node_titles;
     std::vector<double> centrality;
 	std::vector<std::vector<Node>> shortest_paths;
-	for (auto node1 : nodes) {
+	for (auto node1 : nodes) { //Find every path to tehn calculate centrality of nodes
 		for (auto node2 : nodes) {
 			if (node1 != node2) {
-				std::vector<Node> shortest_path = Bfs(node1.title_, node2.title_);
+				std::vector<Node> shortest_path = Bfs(node1.title_, node2.title_); 
 				shortest_paths.push_back(shortest_path);
 			}
 		}
@@ -146,12 +146,12 @@ std::vector<std::set<Node>> Graph::Tarjans() {
     for (auto n : node_map) {
         if (depth[n.second.index_] == -1) {
 			Node pass = n.second;
-			auto to_add = strongconnect(pass, index, depth, s, onStack, lowlinks);
+			auto to_add = strongconnect(pass, index, depth, s, onStack, lowlinks); 
 			if (!to_add.empty()) {
 				if (!to_return.empty()) {
 					bool already= false;
 					for (std::set<Node> check: to_return) {
-						if(includes(check.begin(), check.end(), to_add.begin(), to_add.end())) {
+						if(includes(check.begin(), check.end(), to_add.begin(), to_add.end())) { //Checking that strongest component is added
 							check = (check.size() > to_add.size()) ? check : to_add;
 							already = true;
 							break;
@@ -182,8 +182,8 @@ std::set<Node> Graph::strongconnect(Node n, int &index, std::vector<int> &depth,
 			Node w = node_map[edge.destination_];
 			int w_index = w.index_;
 			if (depth[w_index] == -1) {
-				auto to_add = strongconnect(w, index, depth, s, onStack, lowlinks);
-				to_return.insert(to_add.begin(), to_add.end());
+				auto to_add = strongconnect(w, index, depth, s, onStack, lowlinks); //Recurse if depth index isnt set
+				to_return.insert(to_add.begin(), to_add.end()); //add to current component
 				lowlinks[node_index] = (lowlinks[node_index] < lowlinks[w_index]) ? lowlinks[node_index ]: lowlinks[w_index];
 			} else if(onStack[w_index]) {
 				lowlinks[node_index] = (lowlinks[node_index] < depth[w_index]) ? lowlinks[node_index]:depth[w_index];
@@ -193,7 +193,7 @@ std::set<Node> Graph::strongconnect(Node n, int &index, std::vector<int> &depth,
     }
 	Node top;
 	
-    if (lowlinks[node_index] == depth[node_index]) {
+    if (lowlinks[node_index] == depth[node_index]) { //Pop off stack to create the component
         while (top != n && s.size() >= 1) {
             top = s.top();
         	s.pop();
