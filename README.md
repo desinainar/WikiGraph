@@ -40,3 +40,7 @@ Node2   Edge1
 .
 .
 Once the set is created, save it into WikiGraphs/Documents. Once you run main, you can follo the instructions provided while running the program to read-in this file.
+
+Test Suite Instructions:
+From the WikiGraph directory, cd into tests. Once in the tests file, use "g++ -g -o test tests.cpp ../src/Node.cpp ../src/Graph.cpp" to compile and "./test" to run the suite.
+Generally, tests included a test for empty graphs, different numbers of componenets, and validation of correct output. Tarjans required more tests to validate its unexpected output on Wikipedias graphs, and Brandes required less since BFS was also tested and was the primary moving part of the algorithm.
