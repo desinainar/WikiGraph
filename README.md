@@ -57,11 +57,7 @@ Node1 , Edge2
 
 Node2 , Edge1
 
-.
-
-.
-
-.
+...
 
 Once the set is created, save it into WikiGraphs/Documents. Once you run main, you can follow the instructions provided while running the program to read-
 in this file.
