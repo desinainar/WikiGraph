@@ -39,7 +39,7 @@ Node2   Edge1
 .
 .
 .
-Once the set is created, save it into WikiGraphs/Documents. Once you run main, you can follo the instructions provided while running the program to read-in this file.
+Once the set is created, save it into WikiGraphs/Documents. Once you run main, you can follow the instructions provided while running the program to read-in this file.
 
 Test Suite Instructions:
 From the WikiGraph directory, cd into tests. Once in the tests file, use "g++ -g -o test tests.cpp ../src/Node.cpp ../src/Graph.cpp" to compile and "./test" to run the suite.
