@@ -82,7 +82,7 @@ int main()
         comp_count++;
     }
 
-    //Brandes:
+    std::cout << "Betweenness Centrality of Most Central Nodes: (If running on large datasets, allow for processing time)\n";
     std::map<std::string, double> brandes_answer = g.Brandes();
     int i = 0;
     for(auto & elem : brandes_answer){
@@ -90,6 +90,7 @@ int main()
             break;
         }
         cout << elem.first << ", " << elem.second << endl;
+        i++;
     }
 
 

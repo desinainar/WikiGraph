@@ -106,10 +106,10 @@ std::map<string, double> Graph::Brandes() {
 	std::vector<string> node_titles;
     std::vector<double> centrality;
 	std::vector<std::vector<Node>> shortest_paths;
-	for (auto node1 : node_map) {
-		for (auto node2 : node_map) {
-			if (node1.second != node2.second) {
-				std::vector<Node> shortest_path = Bfs(node1.first, node2.first);
+	for (auto node1 : nodes) {
+		for (auto node2 : nodes) {
+			if (node1 != node2) {
+				std::vector<Node> shortest_path = Bfs(node1.title_, node2.title_);
 				shortest_paths.push_back(shortest_path);
 			}
 		}

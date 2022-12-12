@@ -375,9 +375,18 @@ TEST_CASE("Brandes Algorithm", "[weight=5]"){
         Graph b = Graph();
         b.readIn("data/bfs_small.txt");
         map<string, double> central = b.Brandes();
-        REQUIRE(central["Baseball"] == (7.0/12));
-        REQUIRE(central["Desi"] == (6.0/12));
-        REQUIRE(central["Matt"] == (8.0/12));
-        REQUIRE(central["Ruben"] == (9.0/12));
+        REQUIRE(central["Baseball"] == (1.0/12));
+        REQUIRE(central["Desi"] == (2.0/12));
+        REQUIRE(central["Matt"] == (2.0/12));
+        REQUIRE(central["Ruben"] == (2.0/12));
+    }
+    SECTION("Correct centrality_2") {
+        Graph b = Graph();
+        b.readIn("data/tarjansmulti_2.txt");
+        map<string, double> central = b.Brandes();
+        REQUIRE(central["1"] == (1.0/20));
+        REQUIRE(central["2"] == (1.0/20));
+        REQUIRE(central["5"] == (1.0/20));
+        REQUIRE(central["7"] == (1.0/20));
     }
 }
