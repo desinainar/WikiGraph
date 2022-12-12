@@ -52,7 +52,7 @@ int main()
             cout << "Path Not Found\n";
         } else {
             cout << "Path:\n";
-            cout << decoded_start;
+            cout << decoded_start << "\n";
             for(auto & elem : bfs_result){
                 cout << elem.title_ << endl;
             }
