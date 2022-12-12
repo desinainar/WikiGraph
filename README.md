@@ -1,6 +1,8 @@
 # WikiGraph
 CS 225 Final Project by: Matthew Guibord - guibord2, Ruben Neyroud - neyroud2, Desi Nainar - ds34
 
+Link to Final Presentation video: https://mediaspace.illinois.edu/media/t/1_bm1qxsfk
+
 Organization:
 The organization of this project is broken up into 3 major locations. 
 
