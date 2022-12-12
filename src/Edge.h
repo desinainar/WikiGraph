@@ -16,13 +16,13 @@ struct Edge{
 
     //Constructor:
     Edge(string source, string destination) : source_(source), destination_(destination) { }
-
+    //Operator for testing purposes
     bool operator!=(const Edge e1){
         if(source_ != e1.source_){return true;}
         else if(destination_ != e1.destination_){return true;}
         return false;
     }
-
+    //UTF8 decoder; takes in a string and returns the utf-8 decoded text
     std::string utf8_decode(const std::string& encodedString)
     {
         std::string decodedString;
@@ -52,7 +52,7 @@ struct Edge{
         return decodedString;
     }
 
-
+    //Prints the edges source and destination
     void print(){
         std::string new_src = source_;
         std::string new_dst = destination_;
